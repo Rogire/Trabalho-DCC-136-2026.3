@@ -29,6 +29,9 @@ PASSO = 5                                   # capacidades sempre múltiplas de P
 PROPOSTAS_AFASTAMENTO = 20                  # nº de posições sorteadas por candidato quando afastamento > 0
 NUM_BAIRROS = 8                             # nº de centros em torno dos quais os candidatos são agrupados
 
+BASE_PATH_TXT = "Instancias/txt/"
+BASE_PATH_CSV = "Instancias/csv/"
+
 # PERFIS: Base e a diferenciada para dificultar
 PERFIS = {
     "base": {
@@ -37,7 +40,7 @@ PERFIS = {
         "desbalancear_tipos": False,  # False = tipos distribuídos uniformemente nas escolas
         "prob_segundo_tipo": 0.0,     # chance de a escola poder oferecer um 2º tipo (máx. 2)
         "afastamento": 0.0,           # 0 = posição do candidato independe das escolas do seu tipo
-        
+
     },
     "diferenciada": {
         "utilizacao": 0.95,
@@ -321,8 +324,6 @@ def gerar_instancia(perfil, seed, cap_min, cap_max, caminho:dict[str,str], PRINT
         imprimir_instancia(caminho['txt'], candidatos, escolas, dist)
     if PLOTAR:
         plotar_instancia(caminho['txt'], candidatos, escolas)
-BASE_PATH_TXT = "Instancias/txt/"
-BASE_PATH_CSV = "Instancias/csv/"
 
 def main():
     gerar_instancia(PERFIS["base"], SEED, CAP_MIN, CAP_MAX,
