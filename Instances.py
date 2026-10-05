@@ -35,8 +35,9 @@ PERFIS = {
         "utilizacao": 0.85,           # candidatos / capacidade total (0.80 a 0.95)
         "agrupar_candidatos": False,  # False = candidatos uniformes na área
         "desbalancear_tipos": False,  # False = tipos distribuídos uniformemente nas escolas
-        "prob_segundo_tipo": 0.5,     # chance de a escola poder oferecer um 2º tipo (máx. 2)
+        "prob_segundo_tipo": 0.0,     # chance de a escola poder oferecer um 2º tipo (máx. 2)
         "afastamento": 0.0,           # 0 = posição do candidato independe das escolas do seu tipo
+        
     },
     "diferenciada": {
         "utilizacao": 0.95,
@@ -320,12 +321,26 @@ def gerar_instancia(perfil, seed, cap_min, cap_max, caminho:dict[str,str], PRINT
         imprimir_instancia(caminho['txt'], candidatos, escolas, dist)
     if PLOTAR:
         plotar_instancia(caminho['txt'], candidatos, escolas)
+BASE_PATH_TXT = "Instancias/txt/"
+BASE_PATH_CSV = "Instancias/csv/"
 
 def main():
     gerar_instancia(PERFIS["base"], SEED, CAP_MIN, CAP_MAX,
-        {"txt": "instancia_1.txt", "candidatos": "candidatos_1.csv", "escolas": "escolas_1.csv", "matriz": "matriz_1.csv", "salas": "salas_1.csv"})
+        {
+            "txt": BASE_PATH_TXT + "instancia_1.txt",
+            "candidatos": BASE_PATH_CSV + "candidatos_1.csv",
+            "escolas": BASE_PATH_CSV + "escolas_1.csv",
+            "matriz": BASE_PATH_CSV + "matriz_1.csv",
+            "salas": BASE_PATH_CSV + "salas_1.csv"
+        })
     gerar_instancia(PERFIS["diferenciada"], SEED + 1, CAP_MIN, CAP_MAX,
-        {"txt": "instancia_2.txt", "candidatos": "candidatos_2.csv", "escolas": "escolas_2.csv", "matriz": "matriz_2.csv", "salas": "salas_2.csv"})
+        {
+            "txt": BASE_PATH_TXT + "instancia_2.txt",
+            "candidatos": BASE_PATH_CSV + "candidatos_2.csv",
+            "escolas": BASE_PATH_CSV + "escolas_2.csv",
+            "matriz": BASE_PATH_CSV + "matriz_2.csv",
+            "salas": BASE_PATH_CSV + "salas_2.csv"
+        })
 
     if BAIXAR_ARQUIVOS:
         try:
