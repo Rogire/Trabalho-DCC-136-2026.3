@@ -171,24 +171,46 @@ def validar(candidatos, escolas):
     return cap_total, razao
 
 
-def escrever(caminho, candidatos, escolas, dist):
-    with open(caminho, "w", encoding="utf-8") as f:
-        f.write(f"{len(candidatos)}\n")   # 1. quantidade de candidatos
-        f.write(f"{len(escolas)}\n")      # 2. quantidade de escolas
-        f.write("# CANDIDATOS: id_estudante cep x_km y_km tipo_prova\n")  # 3.
-        for c in candidatos:
-            f.writelines(f"{c['id']} {c['cep']} {c['x']:.2f} {c['y']:.2f} {c['tipo']}\n")
-        f.write("# ESCOLAS: id_escola cep x_km y_km tipos_possiveis capacidade num_salas\n")  # 4.
-        for e in escolas:
-            f.writelines(f"{e['id']} {e['cep']} {e['x']:.2f} {e['y']:.2f} "
-                    f"{','.join(e['tipos'])} {e['capacidade']} {len(e['salas'])}\n")
-        f.write("# SALAS: id_escola cap_sala_1 cap_sala_2 ...\n")  # 5.
-        for e in escolas:
-            f.writelines(e["id"] + " " + " ".join(map(str, e["salas"])) + "\n")
-        f.write("# MATRIZ DE DISTANCIAS (km): linhas = candidatos, colunas = escolas\n")  # 6.
-        for linha in dist:
-            f.writelines(" ".join(f"{d:.2f}" for d in linha) + "\n")
-
+def escrever(caminho:dict[str,str], candidatos, escolas, dist, tipo: str):
+    match tipo:
+        case "txt":
+            with open(caminho["txt"], "w", encoding="utf-8") as f:
+                f.write(f"{len(candidatos)}\n")   # 1. quantidade de candidatos
+                f.write(f"{len(escolas)}\n")      # 2. quantidade de escolas
+                f.write("# CANDIDATOS: id_estudante cep x_km y_km tipo_prova\n")  # 3.
+                for c in candidatos:
+                    f.writelines(f"{c['id']} {c['cep']} {c['x']:.2f} {c['y']:.2f} {c['tipo']}\n")
+                f.write("# ESCOLAS: id_escola cep x_km y_km tipos_possiveis capacidade num_salas\n")  # 4.
+                for e in escolas:
+                    f.writelines(f"{e['id']} {e['cep']} {e['x']:.2f} {e['y']:.2f} "
+                            f"{','.join(e['tipos'])} {e['capacidade']} {len(e['salas'])}\n")
+                f.write("# SALAS: id_escola cap_sala_1 cap_sala_2 ...\n")  # 5.
+                for e in escolas:
+                    f.writelines(e["id"] + " " + " ".join(map(str, e["salas"])) + "\n")
+                f.write("# MATRIZ DE DISTANCIAS (km): linhas = candidatos, colunas = escolas\n")  # 6.
+                for linha in dist:
+                    f.writelines(" ".join(f"{d:.2f}" for d in linha) + "\n")
+                f.close()
+        case "csv":
+            with open(caminho['candidatos'], "w", encoding="utf-8") as f:
+                for c in candidatos:
+                    f.writelines(f"{c['id']},{c['cep']},{c['x']:.2f},{c['y']:.2f},{c['tipo']}\n")
+                f.close()
+            with open(caminho['escolas'], "w", encoding="utf-8") as f:
+                for e in escolas:
+                    f.writelines(f"{e['id']},{e['cep']},{e['x']:.2f},{e['y']:.2f},{','.join(e['tipos'])},"
+                    f"{e['capacidade']},{len(e['salas'])}\n")
+                f.close()
+            with open(caminho['salas'], "w", encoding="utf-8") as f:
+                for e in escolas:
+                    f.writelines(e["id"] + "," + ",".join(map(str, e["salas"])) + "\n")
+                f.close()
+            with open(caminho['matriz'], "w", encoding="utf-8") as f:
+                for linha in dist:
+                    f.writelines(",".join(f"{d:.2f}" for d in linha) + "\n")
+                f.close()
+        case _:
+            raise ValueError(f"tipo inválido: {tipo}")
 
 def imprimir_instancia(nome, candidatos, escolas, dist):
     """Mostra a instância na tela, conforme as flags PRINT_* do topo do arquivo."""
@@ -242,7 +264,6 @@ def imprimir_instancia(nome, candidatos, escolas, dist):
         print("\n".join(mostradas) + (("\n" + aviso) if aviso else ""))
         print()
 
-
 def plotar_instancia(nome, candidatos, escolas):
     """Gráfico da distribuição espacial: candidatos (coloridos por tipo de prova)
     e escolas (quadrados, com tamanho proporcional à capacidade)."""
@@ -280,8 +301,7 @@ def plotar_instancia(nome, candidatos, escolas):
         fig.savefig(nome.replace(".txt", ".png"), dpi=150, bbox_inches="tight")
     plt.show()
 
-
-def gerar_instancia(perfil, seed, cap_min, cap_max, caminho):
+def gerar_instancia(perfil, seed, cap_min, cap_max, caminho:dict[str,str], PRINTAR=True, PLOTAR=False):
     rng = random.Random(seed)
     n_escolas = rng.randint(10, 20)
     escolas = gerar_escolas(n_escolas, cap_min, cap_max,
@@ -290,26 +310,34 @@ def gerar_instancia(perfil, seed, cap_min, cap_max, caminho):
                                   perfil["agrupar_candidatos"], perfil["afastamento"], rng)
     cap_total, razao = validar(candidatos, escolas)
     dist = matriz_distancias(candidatos, escolas)
-    escrever(caminho, candidatos, escolas, dist)
-    print(f"{caminho}: {len(candidatos)} candidatos, {len(escolas)} escolas, "
-          f"capacidade total {cap_total}, utilização {razao:.1%}")
-    if PRINTAR:
-        imprimir_instancia(caminho, candidatos, escolas, dist)
-    if PLOTAR:
-        plotar_instancia(caminho, candidatos, escolas)
 
+    escrever(caminho, candidatos, escolas, dist, "txt")
+    escrever(caminho, candidatos, escolas, dist, "csv")
+
+    print(f"{caminho['txt']}: {len(candidatos)} candidatos, {len(escolas)} escolas, "
+        f"capacidade total {cap_total}, utilização {razao:.1%}")
+    if PRINTAR:
+        imprimir_instancia(caminho['txt'], candidatos, escolas, dist)
+    if PLOTAR:
+        plotar_instancia(caminho['txt'], candidatos, escolas)
 
 def main():
-    gerar_instancia(PERFIS["base"], SEED, CAP_MIN, CAP_MAX, "instancia_1.txt")
-    gerar_instancia(PERFIS["diferenciada"], SEED + 1, CAP_MIN, CAP_MAX, "instancia_2.txt")
+    gerar_instancia(PERFIS["base"], SEED, CAP_MIN, CAP_MAX,
+        {"txt": "instancia_1.txt", "candidatos": "candidatos_1.csv", "escolas": "escolas_1.csv", "matriz": "matriz_1.csv", "salas": "salas_1.csv"})
+    gerar_instancia(PERFIS["diferenciada"], SEED + 1, CAP_MIN, CAP_MAX,
+        {"txt": "instancia_2.txt", "candidatos": "candidatos_2.csv", "escolas": "escolas_2.csv", "matriz": "matriz_2.csv", "salas": "salas_2.csv"})
 
     if BAIXAR_ARQUIVOS:
         try:
             from google.colab import files  # só existe no Colab
             files.download("instancia_1.txt")
             files.download("instancia_2.txt")
+            files.download("candidatos_1.csv")
+            files.download("escolas_1.csv")
+            files.download("matriz_1.csv")
+            files.download("candidatos_2.csv")
+            files.download("escolas_2.csv")
+            files.download("matriz_2.csv")
         except ImportError:
             print("Fora do Colab: arquivos salvos na pasta atual.")
-
-
 main()
