@@ -32,6 +32,9 @@ NUM_BAIRROS = 8                             # nº de centros em torno dos quais 
 BASE_PATH_TXT = "Instancias/txt/"
 BASE_PATH_CSV = "Instancias/csv/"
 
+MAX_USAGE = 0.98
+MIN_USAGE = 0.80
+
 # PERFIS: Base e a diferenciada para dificultar
 PERFIS = {
     "base": {
@@ -43,11 +46,11 @@ PERFIS = {
 
     },
     "diferenciada": {
-        "utilizacao": 0.95,
+        "utilizacao": MAX_USAGE,
         "agrupar_candidatos": True,   # candidatos concentrados em poucos "bairros"
         "desbalancear_tipos": True,   # alguns tipos têm pouquíssima capacidade
-        "prob_segundo_tipo": 0.5,
-        "afastamento": 2.0,           # > 0 = candidatos tendem a ficar longe das escolas que aplicam seu tipo
+        "prob_segundo_tipo": 0.0,
+        "afastamento": 2.5,           # > 0 = candidatos tendem a ficar longe das escolas que aplicam seu tipo
                                       # (peso = distância ^ afastamento; quanto maior, mais forte o efeito)
     },
 }
@@ -162,7 +165,7 @@ def validar(candidatos, escolas):
     assert 10 <= len(escolas) <= 20, "nº de escolas fora de 10..20"
     assert len(candidatos) <= cap_total, "candidatos excedem a capacidade total"
     razao = len(candidatos) / cap_total
-    assert 0.80 <= razao <= 0.95 + 1e-9, f"utilização fora de 80-95%: {razao:.3f}"
+    assert MIN_USAGE <= razao <= MAX_USAGE + 1e-9, f"utilização fora de 80-95%: {razao:.3f}"
     for e in escolas:
         assert e["capacidade"] == sum(e["salas"])
         assert 1 <= len(e["tipos"]) <= 2, "escola com mais de 2 tipos"
@@ -179,16 +182,16 @@ def escrever(caminho:dict[str,str], candidatos, escolas, dist, tipo: str):
     match tipo:
         case "txt":
             with open(caminho["txt"], "w", encoding="utf-8") as f:
-                f.write(f"{len(candidatos)}\n")   # 1. quantidade de candidatos
-                f.write(f"{len(escolas)}\n")      # 2. quantidade de escolas
-                f.write("# CANDIDATOS: id_estudante cep x_km y_km tipo_prova\n")  # 3.
+                f.write(f"NUM_CANDIDATOS: {len(candidatos)}\n")   # 1. quantidade de candidatos
+                f.write(f"NUM_ESCOLAS: {len(escolas)}\n")      # 2. quantidade de escolas
+                f.write("# CANDIDATOS (id_estudante cep x_km y_km tipo_prova)\n")  # 3.
                 for c in candidatos:
                     f.writelines(f"{c['id']} {c['cep']} {c['x']:.2f} {c['y']:.2f} {c['tipo']}\n")
-                f.write("# ESCOLAS: id_escola cep x_km y_km tipos_possiveis capacidade num_salas\n")  # 4.
+                f.write("# ESCOLAS (id_escola cep x_km y_km tipos_possiveis capacidade num_salas)\n")  # 4.
                 for e in escolas:
                     f.writelines(f"{e['id']} {e['cep']} {e['x']:.2f} {e['y']:.2f} "
                             f"{','.join(e['tipos'])} {e['capacidade']} {len(e['salas'])}\n")
-                f.write("# SALAS: id_escola cap_sala_1 cap_sala_2 ...\n")  # 5.
+                f.write("# SALAS (id_escola cap_sala_1 cap_sala_2 ...)\n")  # 5.
                 for e in escolas:
                     f.writelines(e["id"] + " " + " ".join(map(str, e["salas"])) + "\n")
                 f.write("# MATRIZ DE DISTANCIAS (km): linhas = candidatos, colunas = escolas\n")  # 6.
