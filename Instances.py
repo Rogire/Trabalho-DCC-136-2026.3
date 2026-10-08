@@ -50,7 +50,7 @@ PERFIS = {
         "agrupar_candidatos": True,   # candidatos concentrados em poucos "bairros"
         "desbalancear_tipos": True,   # alguns tipos têm pouquíssima capacidade
         "prob_segundo_tipo": 0.0,
-        "afastamento": 2.5,           # > 0 = candidatos tendem a ficar longe das escolas que aplicam seu tipo
+        "afastamento": 0.0,           # > 0 = candidatos tendem a ficar longe das escolas que aplicam seu tipo
                                       # (peso = distância ^ afastamento; quanto maior, mais forte o efeito)
     },
 }
@@ -113,9 +113,31 @@ def gerar_candidatos(escolas, utilizacao, agrupar, afastamento, rng):
     # posições das escolas que PODEM aplicar cada tipo (usadas no afastamento)
     locais_tipo = {t: [(e["x"], e["y"]) for e in escolas if t in e["tipos"]] for t in TIPOS}
 
-    # centros para agrupar candidatos no perfil diferenciado
-    centros = [(rng.uniform(0.15, 0.85) * AREA_KM, rng.uniform(0.15, 0.85) * AREA_KM)
-               for _ in range(NUM_BAIRROS)]
+    # Gerar centros maximizando a distância mínima em relação a todas as escolas
+    centros = []
+    for _ in range(NUM_BAIRROS):
+        melhor_centro = None
+        maior_dist_min_escola = -1.0
+        
+        # Amostra pontos candidatos pelo mapa
+        for _ in range(200):
+            cx = rng.uniform(0.15, 0.85) * AREA_KM
+            cy = rng.uniform(0.15, 0.85) * AREA_KM
+            
+            # Calcula a distância do candidato à escola mais próxima
+            dist_escola_min = min(math.hypot(cx - e["x"], cy - e["y"]) for e in escolas)
+            
+            # Se já houver centros, penaliza se estiver muito colado em outro centro já gerado
+            dist_centros_min = min([math.hypot(cx - ox, cy - oy) for ox, oy in centros] + [float('inf')])
+            
+            # Queremos que fique longe das escolas, mas de forma bem distribuída (sem acumular no mesmo ponto vazio)
+            pontuacao = min(dist_escola_min, dist_centros_min)
+            
+            if pontuacao > maior_dist_min_escola:
+                maior_dist_min_escola = pontuacao
+                melhor_centro = (cx, cy)
+                
+        centros.append(melhor_centro)
 
     def sorteia_ponto():
         if not agrupar:
