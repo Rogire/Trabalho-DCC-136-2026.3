@@ -23,7 +23,7 @@ Para cada candidato, devem ser informados:
 - identificador do candidato;
 - localização (CEP);
 - tipo de prova a ser realizado.
-- 
+  
 **Locais de prova - Escolas**
 Para cada local, devem ser informados:
 - identificador da escola;
@@ -49,7 +49,7 @@ O grupo deve garantir que:
 parâmetros definidos nesta atividade.
 
 
-Linguagem de implementação: Python
+Linguagem de implementação do gerador de instâncias: Python
 
 ## Parte 2 - Implementação do algoritmo
 # Trabalho-Inteligencia-Computacional-DCC-136-2026.3
