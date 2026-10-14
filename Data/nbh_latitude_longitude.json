@@ -1,0 +1,778 @@
+{
+  "Adolfo Vireque": {
+    "latitude": -21.752761200000002,
+    "longitude": -43.402008925
+  },
+  "Aeroporto": {
+    "latitude": -21.767655801807226,
+    "longitude": -43.37753396506024
+  },
+  "Alto dos Passos": {
+    "latitude": -21.769465017584746,
+    "longitude": -43.347701349152544
+  },
+  "Alto dos Pinheiros": {
+    "latitude": -21.764135775,
+    "longitude": -43.371015743
+  },
+  "Alto Sumaré": {
+    "latitude": -21.7952293,
+    "longitude": -43.409871
+  },
+  "Aracy": {
+    "latitude": -21.7597742,
+    "longitude": -43.332130175
+  },
+  "Arco Íris": {
+    "latitude": -21.8032461875,
+    "longitude": -43.3500013
+  },
+  "Área Rural de Juiz de Fora": {
+    "latitude": -21.7623644,
+    "longitude": -43.3436917
+  },
+  "Bairu": {
+    "latitude": -21.73868264090909,
+    "longitude": -43.3516144
+  },
+  "Bandeirantes": {
+    "latitude": -21.721852752380954,
+    "longitude": -43.354565061904765
+  },
+  "Barão do Retiro": {
+    "latitude": -21.742319038541666,
+    "longitude": -43.321213665625
+  },
+  "Barbosa Lage": {
+    "latitude": -21.754949243554396,
+    "longitude": -43.35902111456781
+  },
+  "Barreira do Triunfo": {
+    "latitude": -21.669523369354838,
+    "longitude": -43.423021064516135
+  },
+  "Benﬁca": {
+    "latitude": -21.681702350220267,
+    "longitude": -43.43422881189427
+  },
+  "Boa Vista": {
+    "latitude": -21.78100715,
+    "longitude": -43.343944175000004
+  },
+  "Bom Clima": {
+    "latitude": -21.732459603773584,
+    "longitude": -43.36061433773585
+  },
+  "Bom Pastor": {
+    "latitude": -21.772937647826087,
+    "longitude": -43.33994353188405
+  },
+  "Bonﬁm": {
+    "latitude": -21.733445072,
+    "longitude": -43.344081463
+  },
+  "Bonsucesso": {
+    "latitude": -21.74531603076923,
+    "longitude": -43.33826221538462
+  },
+  "Borboleta": {
+    "latitude": -21.75878631351351,
+    "longitude": -43.3779824081081
+  },
+  "Bosque Dias Tavares": {
+    "latitude": -21.66247,
+    "longitude": -43.43731
+  },
+  "Bosque do Imperador": {
+    "latitude": -21.773541525,
+    "longitude": -43.40702245
+  },
+  "Bosque dos Pinheiros": {
+    "latitude": -21.7538817125,
+    "longitude": -43.3346487
+  },
+  "Cachoeira": {
+    "latitude": -21.601719511111114,
+    "longitude": -43.424664022222224
+  },
+  "Caeté": {
+    "latitude": -21.8088758,
+    "longitude": -43.2611946
+  },
+  "Caiçaras": {
+    "latitude": -21.759672615151516,
+    "longitude": -43.390267993939396
+  },
+  "Carlos Chagas": {
+    "latitude": -21.744498069230765,
+    "longitude": -43.39151510769231
+  },
+  "Cascatinha": {
+    "latitude": -21.788541444444444,
+    "longitude": -43.36626756222223
+  },
+  "Centenário": {
+    "latitude": -21.74195015,
+    "longitude": -43.35644853181818
+  },
+  "Centro": {
+    "latitude": -21.748228443805306,
+    "longitude": -43.36724490781711
+  },
+  "Cerâmica": {
+    "latitude": -21.749471405263158,
+    "longitude": -43.38346549473684
+  },
+  "Chales do Imperador": {
+    "latitude": -21.7631107,
+    "longitude": -43.36218468333333
+  },
+  "Chapéu D'Uvas": {
+    "latitude": -21.5942308,
+    "longitude": -43.5058888
+  },
+  "Cidade do Sol": {
+    "latitude": -21.72161146923077,
+    "longitude": -43.40376864615385
+  },
+  "Cidade Jardim": {
+    "latitude": -21.741344255555553,
+    "longitude": -43.36807917777778
+  },
+  "Cidade Nova": {
+    "latitude": -21.749955677777777,
+    "longitude": -43.591862533333334
+  },
+  "Costa Carvalho": {
+    "latitude": -21.758120022222222,
+    "longitude": -43.337930542857144
+  },
+  "Cruzeiro de Santo Antônio": {
+    "latitude": -21.7796668625,
+    "longitude": -43.394837137500005
+  },
+  "Cruzeiro do Sul": {
+    "latitude": -21.78910817073171,
+    "longitude": -43.34484101097561
+  },
+  "Democrata": {
+    "latitude": -21.749307016666666,
+    "longitude": -43.36555193888889
+  },
+  "Dias Tavares": {
+    "latitude": -21.64702705,
+    "longitude": -43.45680455
+  },
+  "Distrito Industrial": {
+    "latitude": -21.598332572727273,
+    "longitude": -43.46880072727273
+  },
+  "Dom Bosco": {
+    "latitude": -21.773381687815128,
+    "longitude": -43.343290507142854
+  },
+  "Eldorado": {
+    "latitude": -21.7306261,
+    "longitude": -43.359720310958906
+  },
+  "Encosta do Sol": {
+    "latitude": -21.736342115789473,
+    "longitude": -43.40209881578947
+  },
+  "Esplanada": {
+    "latitude": -21.763613,
+    "longitude": -43.643113445454546
+  },
+  "Estrela Sul": {
+    "latitude": -21.784628242857142,
+    "longitude": -43.355892142857144
+  },
+  "Fábrica": {
+    "latitude": -21.741498211940296,
+    "longitude": -43.37519091343283
+  },
+  "Filgueiras": {
+    "latitude": -21.675523349206347,
+    "longitude": -43.32497607936508
+  },
+  "Floresta": {
+    "latitude": -21.685754693333333,
+    "longitude": -43.37075782888889
+  },
+  "Fontesville": {
+    "latitude": -21.738707044444443,
+    "longitude": -43.40645235555556
+  },
+  "Fontesville II": {
+    "latitude": -21.74566434,
+    "longitude": -43.39515986
+  },
+  "Francisco Bernardino": {
+    "latitude": -21.73982731642512,
+    "longitude": -43.39823514009662
+  },
+  "Grajaú": {
+    "latitude": -21.745990729787234,
+    "longitude": -43.3445133106383
+  },
+  "Grama": {
+    "latitude": -21.689518993382354,
+    "longitude": -43.34376248897059
+  },
+  "Graminha": {
+    "latitude": -21.789275872,
+    "longitude": -43.3444878
+  },
+  "Granbery": {
+    "latitude": -21.76701232692308,
+    "longitude": -43.34305296923076
+  },
+  "Granjas Betânia": {
+    "latitude": -21.712184668,
+    "longitude": -43.362409688
+  },
+  "Granjas Bethel": {
+    "latitude": -21.679646679999998,
+    "longitude": -43.3905392
+  },
+  "Granjas do Bosque": {
+    "latitude": -21.79434685,
+    "longitude": -43.372343099999995
+  },
+  "Granjas Guarujá": {
+    "latitude": -21.675921150000004,
+    "longitude": -43.34532901666666
+  },
+  "Granjas Santo Antônio": {
+    "latitude": -21.7841881875,
+    "longitude": -43.32878145
+  },
+  "Granville": {
+    "latitude": -21.762425075,
+    "longitude": -43.37067365
+  },
+  "Humaitá": {
+    "latitude": -21.673884784800002,
+    "longitude": -43.4437918192
+  },
+  "Igrejinha": {
+    "latitude": -21.699612647058824,
+    "longitude": -43.49232035882353
+  },
+  "Industrial": {
+    "latitude": -21.739181917391303,
+    "longitude": -43.3888763884058
+  },
+  "Ipiranga": {
+    "latitude": -21.79932549772727,
+    "longitude": -43.35414699090909
+  },
+  "Ipiranguinha": {
+    "latitude": -21.799285967052022,
+    "longitude": -43.35420457630058
+  },
+  "Jardim Casablanca": {
+    "latitude": -21.766037266666668,
+    "longitude": -43.3699279
+  },
+  "Jardim de Alá": {
+    "latitude": -21.793824917391305,
+    "longitude": -43.34528836086957
+  },
+  "Jardim do Sol": {
+    "latitude": -21.75477563846154,
+    "longitude": -43.334060199999996
+  },
+  "Jardim dos Alﬁneiros": {
+    "latitude": -21.71252734,
+    "longitude": -43.41936382
+  },
+  "Jardim Esperança": {
+    "latitude": -21.705497463492062,
+    "longitude": -43.35416241269841
+  },
+  "Jardim Europa": {
+    "latitude": -21.7768825,
+    "longitude": -43.3380405
+  },
+  "Jardim Glória": {
+    "latitude": -21.77749848814139,
+    "longitude": -43.352366192816426
+  },
+  "Jardim L Ermitage": {
+    "latitude": -21.69259756,
+    "longitude": -43.40582184
+  },
+  "Jardim Natal": {
+    "latitude": -21.742863124369748,
+    "longitude": -43.39699047731092
+  },
+  "Jardim Olímpia": {
+    "latitude": -21.785360533333332,
+    "longitude": -43.33981854444445
+  },
+  "Jardins Imperiais": {
+    "latitude": -21.761194975000002,
+    "longitude": -43.3666219
+  },
+  "JK": {
+    "latitude": -21.607921561538458,
+    "longitude": -43.24954454615385
+  },
+  "Jóquei Clube": {
+    "latitude": -21.726113854285718,
+    "longitude": -43.40176875428571
+  },
+  "Ladeira": {
+    "latitude": -21.744657384311925,
+    "longitude": -43.36433408385321
+  },
+  "Linhares": {
+    "latitude": -21.733248214285716,
+    "longitude": -43.329978863095235
+  },
+  "Loteamento Amazônia (Francisco Bernardino)": {
+    "latitude": -21.74680827692308,
+    "longitude": -43.40130325384616
+  },
+  "Manoel Honório": {
+    "latitude": -21.719260948185482,
+    "longitude": -43.350491415524196
+  },
+  "Mansões do Bom Pastor": {
+    "latitude": -21.779684200000002,
+    "longitude": -43.3393826
+  },
+  "Mariano Procópio": {
+    "latitude": -21.748325512546355,
+    "longitude": -43.35257886192831
+  },
+  "Marilândia": {
+    "latitude": -21.787834475,
+    "longitude": -43.39351719
+  },
+  "Marmelos": {
+    "latitude": -21.7911823,
+    "longitude": -43.3147802
+  },
+  "Martelos": {
+    "latitude": -21.769444190697676,
+    "longitude": -43.37178259069768
+  },
+  "Marumbi": {
+    "latitude": -21.733486582352942,
+    "longitude": -43.34240780882353
+  },
+  "Milho Branco": {
+    "latitude": -21.743077133928573,
+    "longitude": -43.40406470535714
+  },
+  "Monte Castelo": {
+    "latitude": -21.741875924242425,
+    "longitude": -43.38917138484849
+  },
+  "Monte Verde": {
+    "latitude": -21.736952843562754,
+    "longitude": -43.37365159437247
+  },
+  "Morro da Glória": {
+    "latitude": -21.75367501585366,
+    "longitude": -43.36864353902439
+  },
+  "Morro do Imperador": {
+    "latitude": -21.76564,
+    "longitude": -43.36510666666667
+  },
+  "Mundo Novo": {
+    "latitude": -21.775882810000002,
+    "longitude": -43.35035295
+  },
+  "Nossa Senhora Aparecida": {
+    "latitude": -21.746236007017544,
+    "longitude": -43.34541270350877
+  },
+  "Nossa Senhora das Graças": {
+    "latitude": -21.731898185,
+    "longitude": -43.361004635
+  },
+  "Nossa Senhora de Fátima": {
+    "latitude": -21.768805575000002,
+    "longitude": -43.36639194375
+  },
+  "Nossa Senhora de Lourdes": {
+    "latitude": -21.769133006896553,
+    "longitude": -43.326227413793106
+  },
+  "Nova Benﬁca": {
+    "latitude": -21.71026775,
+    "longitude": -43.44657616111111
+  },
+  "Nova Califórnia": {
+    "latitude": -21.77914363125,
+    "longitude": -43.401261184375
+  },
+  "Nova Era": {
+    "latitude": -21.707362382702705,
+    "longitude": -43.431517412432434
+  },
+  "Novo Horizonte": {
+    "latitude": -21.786714806329115,
+    "longitude": -43.395257951898735
+  },
+  "Novo Triunfo": {
+    "latitude": -21.670566,
+    "longitude": -43.42133984545455
+  },
+  "Paineiras": {
+    "latitude": -21.765680974074073,
+    "longitude": -43.3536225
+  },
+  "Parque Alto": {
+    "latitude": -21.7978119,
+    "longitude": -43.38120756666666
+  },
+  "Parque das Palmeiras": {
+    "latitude": -21.79004698,
+    "longitude": -43.31721974
+  },
+  "Parque das Samambaias": {
+    "latitude": -21.658516775,
+    "longitude": -43.435365475
+  },
+  "Parque das Torres": {
+    "latitude": -21.7108407375,
+    "longitude": -43.4062037375
+  },
+  "Parque Guadalajara": {
+    "latitude": -21.793474375,
+    "longitude": -43.378972125
+  },
+  "Parque Guarani": {
+    "latitude": -21.634674914285714,
+    "longitude": -43.27351386428571
+  },
+  "Parque Guarua": {
+    "latitude": -21.772171676923076,
+    "longitude": -43.26505018461538
+  },
+  "Parque Imperial": {
+    "latitude": -21.760554833333334,
+    "longitude": -43.36731903333333
+  },
+  "Parque Independência": {
+    "latitude": -21.689749844444446,
+    "longitude": -43.35639457777778
+  },
+  "Parque Independência III": {
+    "latitude": -21.686950866666667,
+    "longitude": -43.35918346666667
+  },
+  "Parque Jardim Burnier": {
+    "latitude": -21.7496892,
+    "longitude": -43.367637020000004
+  },
+  "Parque Jardim da Serra": {
+    "latitude": -21.77217238181818,
+    "longitude": -43.41340077727273
+  },
+  "Parque Serra Verde": {
+    "latitude": -21.7741461,
+    "longitude": -43.34779885
+  },
+  "Paula Lima": {
+    "latitude": -21.619477633333332,
+    "longitude": -43.50078901111111
+  },
+  "Pedra Bonita": {
+    "latitude": -21.759420155555556,
+    "longitude": -43.40117017777778
+  },
+  "Penido": {
+    "latitude": -21.724035,
+    "longitude": -43.5404823
+  },
+  "Pirapitinga": {
+    "latitude": -21.8870667,
+    "longitude": -43.6947298
+  },
+  "Poço Rico": {
+    "latitude": -21.76261790894309,
+    "longitude": -43.34914768373984
+  },
+  "Ponte Preta": {
+    "latitude": -21.631890952941177,
+    "longitude": -43.34646893529412
+  },
+  "Portal da Torre": {
+    "latitude": -21.76860385,
+    "longitude": -43.383301483333334
+  },
+  "Previdenciários": {
+    "latitude": -21.808438875,
+    "longitude": -43.34154110625
+  },
+  "Progresso": {
+    "latitude": -21.730373667213115,
+    "longitude": -43.34566998852459
+  },
+  "Quintas das Avenidas": {
+    "latitude": -21.709855669117648,
+    "longitude": -43.35042538
+  },
+  "Recanto da Mata": {
+    "latitude": -21.726610825,
+    "longitude": -43.40578975
+  },
+  "Recanto dos Lagos": {
+    "latitude": -21.571650542857146,
+    "longitude": -43.39338867142857
+  },
+  "Represa": {
+    "latitude": -21.8615178,
+    "longitude": -43.5266621
+  },
+  "Residência": {
+    "latitude": -21.76804364,
+    "longitude": -43.3453868
+  },
+  "Rosário de Minas": {
+    "latitude": -21.712127125000002,
+    "longitude": -43.59959255
+  },
+  "Sagrado Coração de Jesus": {
+    "latitude": -21.752868372413793,
+    "longitude": -43.40425683793104
+  },
+  "Salvaterra": {
+    "latitude": -21.78878790125,
+    "longitude": -43.36542079875
+  },
+  "Santa Cândida": {
+    "latitude": -21.752357292000003,
+    "longitude": -43.33699592
+  },
+  "Santa Catarina": {
+    "latitude": -21.75376123292683,
+    "longitude": -43.368749476829265
+  },
+  "Santa Cecília": {
+    "latitude": -21.78119016153846,
+    "longitude": -43.35275452692308
+  },
+  "Santa Cruz": {
+    "latitude": -21.707988567961166,
+    "longitude": -43.43594273883495
+  },
+  "Santa Eﬁgênia": {
+    "latitude": -21.792895680555556,
+    "longitude": -43.36562906666667
+  },
+  "Santa Helena": {
+    "latitude": -21.75511479230769,
+    "longitude": -43.355873996153846
+  },
+  "Santa Isabel": {
+    "latitude": -21.7135251875,
+    "longitude": -43.4243315
+  },
+  "Santa Luzia": {
+    "latitude": -21.783328111214953,
+    "longitude": -43.345411682243
+  },
+  "Santa Maria": {
+    "latitude": -21.720000725,
+    "longitude": -43.405278775
+  },
+  "Santa Paula": {
+    "latitude": -21.725725742857144,
+    "longitude": -43.34273682857143
+  },
+  "Santa Rita de Cássia": {
+    "latitude": -21.73744321724138,
+    "longitude": -43.34063375862069
+  },
+  "Santa Teresa": {
+    "latitude": -21.7666097125,
+    "longitude": -43.333338475
+  },
+  "Santa Terezinha": {
+    "latitude": -21.739870901369862,
+    "longitude": -43.35978053150685
+  },
+  "Santana": {
+    "latitude": -21.773548942857143,
+    "longitude": -43.377441960714286
+  },
+  "Santo Antônio": {
+    "latitude": -21.772143773134328,
+    "longitude": -43.318826746268655
+  },
+  "Santos Anjos": {
+    "latitude": -21.7446328375,
+    "longitude": -43.333722576
+  },
+  "Santos Dumont": {
+    "latitude": -21.778944478378378,
+    "longitude": -43.381760045945946
+  },
+  "São Benedito": {
+    "latitude": -21.74726898,
+    "longitude": -43.330435210000005
+  },
+  "São Bernardo": {
+    "latitude": -21.75226807752809,
+    "longitude": -43.3341959741573
+  },
+  "São Damião": {
+    "latitude": -21.71308114,
+    "longitude": -43.43457842666667
+  },
+  "São Dimas": {
+    "latitude": -21.742823712499998,
+    "longitude": -43.3698617625
+  },
+  "São Francisco de Paula": {
+    "latitude": -21.7191804,
+    "longitude": -43.41942551666667
+  },
+  "São Geraldo": {
+    "latitude": -21.803569441666667,
+    "longitude": -43.34234240833334
+  },
+  "São Judas Tadeu": {
+    "latitude": -21.704257,
+    "longitude": -43.43559897916666
+  },
+  "São Mateus": {
+    "latitude": -21.782736182908547,
+    "longitude": -43.34897432428785
+  },
+  "São Pedro": {
+    "latitude": -21.76898385463183,
+    "longitude": -43.3801048543943
+  },
+  "São Sebastião": {
+    "latitude": -21.717391435714287,
+    "longitude": -43.36911905
+  },
+  "São Tarcísio": {
+    "latitude": -21.743812019444444,
+    "longitude": -43.34595025277778
+  },
+  "Sarandira": {
+    "latitude": -21.832199,
+    "longitude": -43.1893104
+  },
+  "Serra D'Água": {
+    "latitude": -21.764188179999998,
+    "longitude": -43.36391463
+  },
+  "Solidariedade": {
+    "latitude": -21.749844239999998,
+    "longitude": -43.26946092
+  },
+  "Spina Ville II": {
+    "latitude": -21.561475066666667,
+    "longitude": -43.268220094444445
+  },
+  "Teixeiras": {
+    "latitude": -21.789014727999998,
+    "longitude": -43.365239722666665
+  },
+  "Terras Altas": {
+    "latitude": -21.696729373076924,
+    "longitude": -43.32824034615385
+  },
+  "Tiguera": {
+    "latitude": -21.772242179032258,
+    "longitude": -43.31842110645161
+  },
+  "Toledos": {
+    "latitude": -21.78637195,
+    "longitude": -43.563181075
+  },
+  "Torreões": {
+    "latitude": -21.846225,
+    "longitude": -43.5958059
+  },
+  "Três Moinhos": {
+    "latitude": -21.7403875,
+    "longitude": -43.339632800000004
+  },
+  "Tupã": {
+    "latitude": -21.60677511818182,
+    "longitude": -43.44024017272727
+  },
+  "Valadares": {
+    "latitude": -21.7955942,
+    "longitude": -43.496063933333325
+  },
+  "Vale do Amanhecer": {
+    "latitude": -21.709639199999998,
+    "longitude": -43.330939275
+  },
+  "Vale do Ipê": {
+    "latitude": -21.755866701694917,
+    "longitude": -43.37102560169491
+  },
+  "Vale Verde": {
+    "latitude": -21.676937933333335,
+    "longitude": -43.40273548888889
+  },
+  "Verbo Divino": {
+    "latitude": -21.624810458333332,
+    "longitude": -43.45280511666667
+  },
+  "Vila Alpina": {
+    "latitude": -21.747885377777777,
+    "longitude": -43.332317922222224
+  },
+  "Vila Branca": {
+    "latitude": -21.7443634,
+    "longitude": -43.3860716
+  },
+  "Vila da Prata": {
+    "latitude": -21.669492171428573,
+    "longitude": -43.38813401428571
+  },
+  "Vila Furtado de Menezes": {
+    "latitude": -21.777163299999998,
+    "longitude": -43.332206855172416
+  },
+  "Vila Ideal": {
+    "latitude": -21.757843642028256,
+    "longitude": -43.355814242230075
+  },
+  "Vila Montanhesa": {
+    "latitude": -21.71848488181818,
+    "longitude": -43.35924564545454
+  },
+  "Vila Olavo Costa": {
+    "latitude": -21.76863962,
+    "longitude": -43.34964665
+  },
+  "Vila Ozanan": {
+    "latitude": -21.77462750833333,
+    "longitude": -43.333706041666666
+  },
+  "Vina del Mar": {
+    "latitude": -21.7810542,
+    "longitude": -43.40337945714286
+  },
+  "Vitorino Braga": {
+    "latitude": -21.745471109174314,
+    "longitude": -43.33464318853211
+  },
+  "Vivendas da Serra": {
+    "latitude": -21.719790725,
+    "longitude": -43.34947085
+  },
+  "Vivendas das Fontes": {
+    "latitude": -20.7813011,
+    "longitude": -43.6771539
+  },
+  "Vivendas do Retiro": {
+    "latitude": -21.75638505,
+    "longitude": -43.35302605
+  }
+}

@@ -1,0 +1,200 @@
+Adolfo Vireque,Faixa: 36036-231 à 36036-234
+Aeroporto,Faixa: 36033-560 à 36038-650
+Alto dos Passos,Faixa: 36010-600 à 36026-900
+Alto dos Pinheiros,Faixa: 36036-235 à 36036-685
+Alto Sumaré,Faixa: 36039-202 à 36039-202
+Aracy,Faixa: 36070-140 à 36070-170
+Arco Íris,Faixa: 36031-530 à 36031-544
+Área Rural de Juiz de Fora,Faixa: 36099-899 à 36099-899
+Bairu,Faixa: 36050-000 à 36050-220
+Bandeirantes,Faixa: 36047-000 à 36047-220
+Barão do Retiro,Faixa: 36072-320 à 36073-970
+Barbosa Lage,Faixa: 36018-971 à 36085-970
+Barreira do Triunfo,Faixa: 36092-210 à 36092-901
+Benﬁca,Faixa: 36090-010 à 36092-580
+Boa Vista,Faixa: 36026-510 à 36026-550
+Bom Clima,Faixa: 36046-050 à 36046-530
+Bom Jardim,Faixa: 36060-778 à 36060-778
+Bom Pastor,Faixa: 36021-000 à 36021-700
+Bonﬁm,Faixa: 36050-230 à 36051-480
+Bonsucesso,Faixa: 36061-250 à 36061-340
+Borboleta,Faixa: 36035-430 à 36035-772
+Bosque Dias Tavares,Faixa: 36092-625 à 36092-639
+Bosque do Imperador,Faixa: 36037-630 à 36037-680
+Bosque dos Pinheiros,Faixa: 36062-050 à 36062-100
+Cachoeira,Faixa: 36091-200 à 36091-214
+Caeté,Faixa: 36102-000 à 36102-000
+Caiçaras,Faixa: 36037-791 à 36037-846
+Campo Alegre,Faixa: 36072-702 à 36072-705
+Carlos Chagas,Faixa: 36081-240 à 36081-330
+Cascatinha,Faixa: 36033-250 à 36033-970
+Centenário,Faixa: 36045-130 à 36045-320
+Centro,Faixa: 36001-959 à 36107-979
+Cerâmica,Faixa: 36080-280 à 36080-450
+Chales do Imperador,Faixa: 36036-360 à 36036-410
+Chapéu D'Uvas,Faixa: 36103-800 à 36103-800
+Cidade do Sol,Faixa: 36085-350 à 36085-450
+Cidade Jardim,Faixa: 36026-560 à 36026-640
+Cidade Nova,Faixa: 36032-200 à 36032-227
+Costa Carvalho,Faixa: 36062-170 à 36070-250
+Cruzeiro de Santo Antônio,Faixa: 36038-280 à 36038-289
+Cruzeiro do Sul,Faixa: 36030-120 à 36030-900
+Democrata,Faixa: 36035-200 à 36035-340
+Dias Tavares,Faixa: 36105-000 à 36105-970
+Distrito Industrial,Faixa: 36092-000 à 36092-050
+Dom Bosco,Faixa: 36016-520 à 36025-660
+Eldorado,Faixa: 36046-080 à 36046-700
+Encosta do Sol,Faixa: 36083-011 à 36083-842
+Esplanada,Faixa: 36080-430 à 36080-520
+Estrela Sul,Faixa: 36030-711 à 36030-719
+Fábrica,Faixa: 36080-001 à 36080-600
+Filgueiras,Faixa: 36048-650 à 36048-826
+Floresta,Faixa: 36072-010 à 36072-350
+Fontesville,Faixa: 36083-770 à 36083-786
+Fontesville II,Faixa: 36084-000 à 36084-018
+Francisco Bernardino,Faixa: 36081-610 à 36084-130
+Grajaú,Faixa: 36052-000 à 36052-400
+Grama,Faixa: 36047-600 à 36048-716
+Graminha,Faixa: 36030-121 à 36030-752
+Granbery,Faixa: 36010-360 à 36010-543
+Granjas Betânia,Faixa: 36047-340 à 36047-520
+Granjas Bethel,Faixa: 36073-080 à 36073-120
+Granjas do Bosque,Faixa: 36033-570 à 36033-580
+Granjas Guarujá,Faixa: 36048-550 à 36048-600
+Granjas Santo Antônio,Faixa: 36020-730 à 36020-785
+Granville,Faixa: 36036-241 à 36036-249
+Humaitá,Faixa: 36091-273 à 36107-800
+Igrejinha,Faixa: 36091-231 à 36091-256
+Industrial,Faixa: 36081-000 à 36081-600
+Ipiranga,Faixa: 36031-065 à 36032-720
+Ipiranguinha,Faixa: 36031-080 à 36032-740
+Jardim Casablanca,Faixa: 36036-250 à 36036-260
+Jardim de Alá,Faixa: 36030-520 à 36030-710
+Jardim do Sol,Faixa: 36062-010 à 36062-120
+Jardim dos Alﬁneiros,Faixa: 36088-480 à 36088-494
+Jardim Esperança,Faixa: 36072-000 à 36072-480
+Jardim Europa,Faixa: 36021-330 à 36021-330
+Jardim Gaúcho,Faixa: 36033-792 à 36033-792
+Jardim Glória,Faixa: 36015-010 à 36036-220
+Jardim L Ermitage,Faixa: 36085-650 à 36085-670
+Jardim Natal,Faixa: 36081-700 à 36083-530
+Jardim Olímpia,Faixa: 36030-320 à 36030-440
+Jardins Imperiais,Faixa: 36036-342 à 36036-348
+JK,Faixa: 36070-310 à 36070-404
+Jóquei Clube,Faixa: 36083-540 à 36085-642
+Ladeira,Faixa: 36035-010 à 36052-600
+Linhares,Faixa: 36060-300 à 36060-750
+Loteamento Amazônia (Francisco Bernardino),Faixa: 36083-030 à 36083-110
+Manoel Honório,Faixa: 36045-000 à 36051-550
+Mansões do Bom Pastor,Faixa: 36021-690 à 36021-740
+Mariano Procópio,Faixa: 36035-020 à 36080-158
+Marilândia,Faixa: 36039-280 à 36039-970
+Marmelos,Faixa: 36073-185 à 36073-185
+Martelos,Faixa: 36036-533 à 36037-035
+Marumbi,Faixa: 36050-560 à 36051-255
+Milho Branco,Faixa: 36083-000 à 36083-340
+Monte Castelo,Faixa: 36080-580 à 36081-842
+Monte Verde,Faixa: 36034-602 à 36107-500
+Morro da Glória,Faixa: 36035-120 à 36036-090
+Morro do Imperador,Faixa: 36036-710 à 36036-712
+Mundo Novo,Faixa: 36026-280 à 36026-360
+Nossa Senhora Aparecida,Faixa: 36052-020 à 36052-540
+Nossa Senhora das Graças,Faixa: 36046-220 à 36046-400
+Nossa Senhora de Fátima,Faixa: 36036-530 à 36036-590
+Nossa Senhora de Lourdes,Faixa: 36070-410 à 36071-210
+Nova Benﬁca,Faixa: 36091-000 à 36091-160
+Nova Califórnia,Faixa: 36039-000 à 36039-270
+Nova Eﬁgênia,Faixa: 36048-843 à 36048-850
+Nova Era,Faixa: 36087-000 à 36090-000
+Novo Horizonte,Faixa: 36038-430 à 36039-430
+Novo Triunfo,Faixa: 36092-410 à 36092-510
+Paço del Rey,Faixa: 36039-442 à 36039-448
+Paineiras,Faixa: 36016-010 à 36016-260
+Parque Alto,Faixa: 36038-400 à 36038-420
+Parque das Palmeiras,Faixa: 36073-000 à 36073-060
+Parque das Samambaias,Faixa: 36073-140 à 36073-170
+Parque das Torres,Faixa: 36085-760 à 36085-778
+Parque Guadalajara,Faixa: 36033-590 à 36033-660
+Parque Guarani,Faixa: 36047-260 à 36047-330
+Parque Guarua,Faixa: 36021-360 à 36021-460
+Parque Imperial,Faixa: 36036-340 à 36036-350
+Parque Independência,Faixa: 36048-390 à 36048-470
+Parque Independência III,Faixa: 36048-472 à 36048-488
+Parque Jardim Burnier,Faixa: 36070-260 à 36070-300
+Parque Jardim da Serra,Faixa: 36038-580 à 36039-120
+Parque Serra Verde,Faixa: 36071-180 à 36071-205
+Paula Lima,Faixa: 36094-000 à 36103-970
+Pedra Bonita,Faixa: 36084-071 à 36084-083
+Penido,Faixa: 36106-800 à 36106-800
+Pirapitinga,Faixa: 36107-600 à 36107-600
+Poço Rico,Faixa: 36010-430 à 36020-420
+Ponte Preta,Faixa: 36092-070 à 36092-200
+Portal da Torre,Faixa: 36037-462 à 36037-467
+Previdenciários,Faixa: 36031-290 à 36031-380
+Progresso,Faixa: 36050-240 à 36051-160
+Quintas das Avenidas,Faixa: 36046-032 à 36050-337
+Recanto da Mata,Faixa: 36083-802 à 36083-815
+Recanto dos Lagos,Faixa: 36048-730 à 36048-748
+Represa,Faixa: 36092-511 à 36092-511
+Residência,Faixa: 36010-550 à 36010-590
+Rosário de Minas,Faixa: 36106-000 à 36106-971
+Sagrado Coração de Jesus,Faixa: 36032-012 à 36032-120
+Salvaterra,Faixa: 36033-003 à 36034-055
+Santa Cândida,Faixa: 36061-360 à 36061-570
+Santa Catarina,Faixa: 36035-170 à 36036-170
+Santa Cecília,Faixa: 36026-020 à 36026-250
+Santa Cruz,Faixa: 36087-460 à 36088-470
+Santa Eﬁgênia,Faixa: 36032-010 à 36032-430
+Santa Helena,Faixa: 36015-170 à 36015-400
+Santa Isabel,Faixa: 36087-750 à 36087-764
+Santa Luzia,Faixa: 36030-000 à 36031-060
+Santa Maria,Faixa: 36085-155 à 36085-165
+Santa Paula,Faixa: 36050-465 à 36050-500
+Santa Rita de Cássia,Faixa: 36051-220 à 36051-445
+Santa Teresa,Faixa: 36020-170 à 36020-240
+Santa Terezinha,Faixa: 36045-050 à 36046-130
+Santana,Faixa: 36037-100 à 36037-360
+Santo Antônio,Faixa: 36071-000 à 36071-570
+Santos Anjos,Faixa: 36060-160 à 36062-410
+Santos Dumont,Faixa: 36038-000 à 36038-265
+São Benedito,Faixa: 36061-080 à 36061-350
+São Bernardo,Faixa: 36061-000 à 36062-280
+São Damião,Faixa: 36088-510 à 36088-536
+São Dimas,Faixa: 36080-085 à 36080-270
+São Francisco de Paula,Faixa: 36087-470 à 36087-500
+São Geraldo,Faixa: 36031-220 à 36031-375
+São Judas Tadeu,Faixa: 36087-510 à 36087-710
+São Mateus,Faixa: 36016-030 à 36033-240
+São Pedro,Faixa: 36035-690 à 36039-084
+São Sebastião,Faixa: 36061-470 à 36061-560
+São Tarcísio,Faixa: 36051-440 à 36052-155
+Sarandira,Faixa: 36104-000 à 36104-000
+Serra D'Água,Faixa: 36035-700 à 36035-760
+Solidariedade,Faixa: 36021-440 à 36021-490
+Spina Ville II,Faixa: 36037-750 à 36037-790
+Teixeiras,Faixa: 36032-750 à 36033-680
+Terras Altas,Faixa: 36073-200 à 36073-248
+Tiguera,Faixa: 36071-070 à 36071-580
+Toledos,Faixa: 36107-700 à 36107-978
+Torreões,Faixa: 36107-000 à 36107-000
+Três Moinhos,Faixa: 36052-115 à 36052-117
+Tupã,Faixa: 36037-370 à 36037-450
+Valadares,Faixa: 36094-540 à 36101-970
+Vale do Amanhecer,Faixa: 36048-750 à 36048-756
+Vale do Ipê,Faixa: 36035-350 à 36036-130
+Vale dos Lírios,Faixa: 36083-822 à 36083-822
+Vale Verde,Faixa: 36032-001 à 36032-009
+Verbo Divino,Faixa: 36087-715 à 36087-736
+Vila Alpina,Faixa: 36061-010 à 36061-180
+Vila Branca,Faixa: 36081-180 à 36081-180
+Vila da Prata,Faixa: 36071-555 à 36071-585
+Vila Furtado de Menezes,Faixa: 36020-351 à 36021-120
+Vila Ideal,Faixa: 36020-430 à 36070-490
+Vila Montanhesa,Faixa: 36048-180 à 36048-280
+Vila Olavo Costa,Faixa: 36021-130 à 36021-530
+Vila Ozanan,Faixa: 36020-300 à 36021-300
+Vina del Mar,Faixa: 36037-690 à 36037-725
+Vitorino Braga,Faixa: 36060-000 à 36062-430
+Vivendas da Serra,Faixa: 36047-230 à 36047-250
+Vivendas das Fontes,Faixa: 36084-051 à 36084-055
+Vivendas do Retiro,Faixa: 36072-390 à 36072-400
