@@ -21,6 +21,7 @@ class Generate_data:
         self.PROPOSTAS_AFASTAMENTO= PROPOSTAS_AFASTAMENTO
         self.MIN_USAGE= MIN_USAGE
         self.MAX_USAGE= MAX_USAGE
+        
         with open('../Data/nbh_latitude_longitude.json') as f:
             dados = json.load(f)
         self.BAIRROS_JF = dados

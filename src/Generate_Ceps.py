@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 from pathlib import Path
-from Variables import PATH_JSON, PATH_CSV, PATH_MEAN
+from Variables import PATH_JSON, PATH_CSV, PATH_MEAN, ESTIMATED_NBH_POP, ESTIMATED_NBH_W, DATA_MAIN_NBH
 
 class Generate_Ceps:
     def centroid(self,lats, lons, trim=0.05):
@@ -51,25 +51,33 @@ class Generate_Ceps:
     
         nbh_mean_relationship = {}
         for i in range(df_ceps_jf.shape[0]):    
-                nbh = nbhs[i]; min_cep = min_ceps[i]; max_cep = max_ceps[i]; 
-                lats = []; longs= []
-                
-                dif = max_cep - min_cep
-                it=0
-                while(it<=dif):
-                    json_at = dados.get(str(min_cep+it))
-                    if json_at is None:
-                        it+=1
-                        continue
-                        
-                    lats.append(json_at['latitude'])
-                    longs.append(json_at['longitude'])
+            nbh = str(nbhs[i]); min_cep = min_ceps[i].item(); max_cep = max_ceps[i].item(); #.item() converte a Serie de elemento único para numero(int, float,etc...)
+            lats = []; longs= []
+
+            dif = max_cep - min_cep
+            it=0
+            while(it<=dif):
+                json_at = dados.get(str(min_cep+it))
+                if json_at is None:
                     it+=1
+                    continue
+                        
+                lats.append(json_at['latitude'])
+                longs.append(json_at['longitude'])
+                it+=1
     
-                if len(lats)>0 and len(longs)>0:
-                    mean_lat, mean_long = self.centroid(lats,longs)
-                    nbh_mean_relationship[nbh] = {'latitude': mean_lat, 'longitude': mean_long, 'cmin':min_cep, 'cmax': max_cep}
-                    with output.open("w", encoding="utf-8") as f:
-                        json.dump(nbh_mean_relationship, f, ensure_ascii=False, indent=2)
+            if len(lats)>0 and len(longs)>0:
+                mean_lat, mean_long = self.centroid(lats,longs)
+                nbh_mean_relationship[nbh] = {
+                    'latitude': mean_lat, 'longitude': mean_long,
+                    'cmin':min_cep, 'cmax': max_cep,
+                    'w': DATA_MAIN_NBH[nbh]['peso'] if nbh in DATA_MAIN_NBH else ESTIMATED_NBH_W
+                }
+                with output.open("w", encoding="utf-8") as f:
+                    json.dump(nbh_mean_relationship, f, ensure_ascii=False, indent=2)
                         
         return nbh_mean_relationship
+
+
+gen = Generate_Ceps()
+gen.get_mean_cep()
