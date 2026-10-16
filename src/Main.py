@@ -1,6 +1,3 @@
-import sys
-sys.path.insert(1, '/Generate_Info')
-
 from Variables import *
 from Create_instances import Create_instances
 from Profiles import *
