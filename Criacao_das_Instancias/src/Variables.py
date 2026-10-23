@@ -36,37 +36,37 @@ PATH_JSON = "../Data/cepsjf_consolidado.json"
 PATH_CSV  = "../Data/Relacao_Bairros_JF.csv"
 PATH_MEAN = "../Data/nbh_latitude_longitude.json"
 
-BASE_PATH_TXT = "../Instancias/txt/"
-BASE_PATH_CSV = "../Instancias/csv/"
+BASE_PATH_TXT = "../../Instancias_criadas/txt/"
+BASE_PATH_CSV = "../../Instancias_criadas/csv/"
 
 
 POP_JF = 540756
 DATA_MAIN_NBH = {
-    "Benfica": 
+    "Benfica":
         {'pop':23414,'peso':23414/POP_JF},
-    "São Mateus": 
+    "São Mateus":
         {'pop':19255,'peso':19255/POP_JF},
-    "São Pedro": 
+    "São Pedro":
         {'pop':18940,'peso':18940/POP_JF},
-    "Centro": 
+    "Centro":
         {'pop':18569,'peso':18569/POP_JF},
-    "Santa Cruz": 
+    "Santa Cruz":
         {'pop':17032,'peso':17032/POP_JF},
-    "Ipiranga": 
+    "Ipiranga":
         {'pop':16478,'peso':16478/POP_JF},
-    "Progresso": 
+    "Progresso":
         {'pop':16191,'peso':16191/POP_JF},
-    "Maçunge da Grama": 
+    "Maçunge da Grama":
         {'pop':15364,'peso':15364/POP_JF},
-    "Francisco Bernardino": 
+    "Francisco Bernardino":
         {'pop':14145,'peso':14145/POP_JF},
-    "Vale dos Bandeirantes": 
+    "Vale dos Bandeirantes":
         {'pop':12990,'peso':12990/POP_JF}
 }
 
 ESTIMATED_NBH_POP=0
 for i in DATA_MAIN_NBH.values():
     ESTIMATED_NBH_POP+=i['pop']
-    
+
 ESTIMATED_NBH_POP = (POP_JF-ESTIMATED_NBH_POP)/101
 ESTIMATED_NBH_W = ESTIMATED_NBH_POP/POP_JF
