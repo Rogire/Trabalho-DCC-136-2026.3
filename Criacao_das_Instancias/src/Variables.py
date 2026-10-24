@@ -36,8 +36,8 @@ PATH_JSON = "../Data/cepsjf_consolidado.json"
 PATH_CSV  = "../Data/Relacao_Bairros_JF.csv"
 PATH_MEAN = "../Data/nbh_latitude_longitude.json"
 
-BASE_PATH_TXT = "../../Instancias_criadas/txt/"
-BASE_PATH_CSV = "../../Instancias_criadas/csv/"
+BASE_PATH_TXT = "../../../Instancias_criadas/txt/"
+BASE_PATH_CSV = "../../../Instancias_criadas/csv/"
 
 
 POP_JF = 540756

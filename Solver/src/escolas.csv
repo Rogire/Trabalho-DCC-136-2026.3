@@ -1,4 +1,4 @@
-# ESCOLAS (id, CEP, latitude, longitude, num_salas, capacidades_salas)
+id,CEP,tipo_prova,latitude,longitude,
 E01, 36092-956, -21.590180, -43.461409, 6, 95;40;40;85;80;65
 E02, 36050-488, -21.733305, -43.350712, 6, 30;100;60;55;95;70
 E03, 36070-188, -21.756631, -43.333738, 4, 65;25;60;100

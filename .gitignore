@@ -1,2 +1,10 @@
-Instancias/*
 venv/*
+
+Instancias_criadas/*
+
+Criacao_das_Instancias/src/Model_Generation_1/__pycache__/*
+Criacao_das_Instancias/src/Model_Generation_2/__pycache__/*
+Criacao_das_Instancias/src/Model_Generation_1/Instancias
+Criacao_das_Instancias/src/Model_Generation_2/Instancias
+
+Solver/src/__pycache__/*
