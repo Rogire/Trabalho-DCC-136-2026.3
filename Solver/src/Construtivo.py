@@ -73,81 +73,75 @@ def calculate_capacity(esc_df):
 
 def remove_0lefts(esc_ids):
     return [s[0]+ str(int(s[1:])) for s in esc_ids]
-    
+
 
 def construtivo(File):
-    cand_df, esc_df, mat_df, NS,NC = txt_to_df(File)
-    
+    cand_df, esc_df, mat_df, NS, NC = txt_to_df(File)
     esc_df["id"] = remove_0lefts(esc_df["id"])
-    cand_df["id"]= remove_0lefts(cand_df["id"])
-    
+    cand_df["id"] = remove_0lefts(cand_df["id"])
     calculate_capacity(esc_df)
-
-    # soma das distâncias entre os alunos alocados na escola e a escola
-    sum_of_dists = {f"{k}":0 for k in esc_df["id"]}
-    esc_df = esc_df.sort_values(by=["capacidade_total"], ascending=False)
-
-    Exams = cand_df["tipo_prova"].unique()
-    total_exams_types={f"{k}":0 for k in cand_df["tipo_prova"]}
-    for exam in cand_df["tipo_prova"] : total_exams_types[exam] +=1
     
-    def step(esc_cp,cand_cp, mat_cp, nc,ns, sol):
-        if(nc <= 0 or ns <= 0):
-            print("Solução encontrada!")
-            print(f"{nc}, {ns}")
-            return sol
-        
-        K = nc//ns
-        K_dists = []
-        M_props = []
-        
-        for i in esc_cp['id']:
-            sum_of_types = {f"{k}":0 for k in Exams}
-            
-            ordered_dists = pd.DataFrame(mat_cp[i]).sort_values(by=[i])
-            K_dist = ordered_dists[0:K]
-            dist_sum = sum(K_dist[i])
-            sum_of_dists[i] = dist_sum
-            
-            K_dists.append(dist_sum)            
-            for i in K_dist.index:
-                candidate = cand_cp.loc[i]
-                sum_of_types[candidate["tipo_prova"]] += 1
+    esc_df = esc_df.sort_values("capacidade_total", ascending=False)
 
-            proportions = {key: (value/total_exams_types[key]) for key, value in sum_of_types.items()}
-            majority_prop = max(proportions, key=lambda k: proportions[k])
-
-            M_props.append(majority_prop)
-            
-        esc_cp["dist_sum"] = K_dists
-        esc_cp["tipo_prova"] = M_props
-        ordered_dists = esc_cp.sort_values(by=['dist_sum'])
-
-        best = ordered_dists.iloc[0]
-        ordered = pd.DataFrame(mat_cp[best["id"]]).sort_values(by=[best["id"]])[0:K]
-        
-        allocated_cand = cand_cp.loc[ordered.index].copy()
-        
-        allocated_cand = allocated_cand[allocated_cand["tipo_prova"]==best["tipo_prova"]]
-        allocated_cand["escola"] = best["id"]
-        num_allocated = allocated_cand.shape[0]
-
-
-        sol[best["id"]] = {"dist":best["dist_sum"], "exam":best["tipo_prova"], "cap":best["capacidade_total"], "alctd": num_allocated}
-
-        ordered_dists.drop(best.name, axis=0, inplace=True)
-        ns-=1
-
-        cand_cp.drop(index=allocated_cand.index, inplace=True)
-        mat_cp.drop(index=allocated_cand.index, inplace=True)
-        
-        nc -= num_allocated
-
-        return step(ordered_dists, cand_cp, mat_cp, nc, ns, sol)
-
-    solution = step(esc_df.copy(), cand_df.copy(), mat_df.copy(), NC, NS, {})
-    return solution
+    exams = cand_df["tipo_prova"].unique()
+    remaining_cands_per_type = cand_df["tipo_prova"].value_counts().to_dict()
     
-res = construtivo(PATH_BASE);
+    sol = {}; alocacao = {}
+    esc_cp  = esc_df.copy(); cand_cp = cand_df.copy(); mat_cp  = mat_df.copy()
 
-print(res)
+    nc, ns = NC, NS
+    while nc > 0 and ns > 0:
+        K = nc // ns
+        if K <= 0:
+            break
+
+        dist_sums = {}; types_per_school = {}; K_cache = {}
+
+        for sid in esc_cp["id"]:
+            K_dists = mat_cp.nsmallest(K,sid).index
+            K_cache[sid] = K_dists
+            dist_sums[sid] = float(mat_cp.loc[K_dists, sid].sum())
+
+            counts = cand_cp.loc[K_dists, "tipo_prova"].value_counts()
+            avail = [t for t in exams if remaining_cands_per_type.get(t, 0) > 0]
+            if not avail:
+                raise RuntimeError("Sem tipos disponíveis — instância inviável")
+                
+            props = {t: counts.get(t, 0) / remaining_cands_per_type[t] for t in avail}
+            types_per_school[sid] = max(props,  key=lambda k: props[k])
+
+        esc_cp["dist_sum"]   = esc_cp["id"].map(dist_sums)
+        esc_cp["tipo_prova"] = esc_cp["id"].map(types_per_school)
+        best = esc_cp.loc[esc_cp["dist_sum"].idxmin()]
+
+        cap = int(best["capacidade_total"])
+        idx_k = K_cache[best["id"]]
+        cands = cand_cp.loc[idx_k]
+        cands = cands[cands["tipo_prova"] == best["tipo_prova"]].head(cap)
+
+        if cands.empty:
+            esc_cp = esc_cp.drop(best.name)
+            ns -= 1
+            continue
+
+        for cid in cands.index:
+            alocacao[cid] = best["id"]
+            remaining_cands_per_type[best["tipo_prova"]] -= 1
+
+        sol[best["id"]] = {
+            "dist": float(best["dist_sum"]),
+            "exam": best["tipo_prova"],
+            "cap":  cap,
+            "alctd": len(cands),
+        }
+
+        esc_cp = esc_cp.drop(best.name); cand_cp = cand_cp.drop(cands.index); mat_cp  = mat_cp.drop(cands.index)
+        ns -= 1; nc -= len(cands)
+
+    if nc > 0:
+        print(f"[AVISO] {nc} candidatos não alocados — solução inviável")
+
+    return sol, alocacao
+
+sol, al = construtivo(PATH_BASE)
+#print(sol)
