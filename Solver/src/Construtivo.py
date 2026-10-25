@@ -1,26 +1,19 @@
 import pandas as pd
-
-TIPOS = {"M1", "M2", "M3e", "M3s", "M3h", "M3d"}
-PATH_BASE = "../../Instancias_criadas/Instancia1_G7.txt"
-PATH_DIF = "../../Instancias_criadas/Instancia2_G7.txt"
-
-CANDIDATES_HEADER = "# CANDIDATOS (id, CEP, tipo_prova, latitude, longitude)"
-CANDIDATES_COLUMNS  = ["id", "CEP", "tipo_prova", "latitude", "longitude"]
-
-SCHOOLS_HEADER = "# ESCOLAS (id, CEP, latitude, longitude, num_salas, capacidades_salas)"
-SCHOOLS_COLUMNS  = ["id", "CEP", "latitude", "longitude", "num_salas", "capacidades_salas"]
-
-MATRICE_HEADER = "# MATRIZ_DISTANCIAS (linhas=candidatos, colunas=escolas, em km)"
+from Variables import *
 
 def txt_to_df(File):
+    NS,NC = 0,0
     writing = "nothing"
-    with open("candidatos.csv", 'w') as candidatos_csv:
-        pass
-    with open("escolas.csv", 'w') as escolas_csv:
-        pass
+    with open("candidatos.csv", 'w') as candidatos_csv: pass
+    with open("escolas.csv", 'w') as escolas_csv: pass
+    with open("matrice.csv", 'w') as matrice_csv: pass
 
     with open(File, "r") as f:
         for line in f:
+            str_value = line.rstrip("\n")
+            if str_value.find("NUM_CANDIDATOS:") != -1: NC = int(str_value[str_value.find(":")+1:])
+            if str_value.find("NUM_ESCOLAS:") != -1:    NS = int(str_value[str_value.find(":")+1:])
+                
             if line.rstrip('\n') == CANDIDATES_HEADER:
                 writing = "candidates"
                 with open("candidatos.csv",'a') as candidatos_csv:
@@ -28,14 +21,23 @@ def txt_to_df(File):
                         candidatos_csv.writelines(f"{i},")
                     candidatos_csv.write("\n")
                 continue
-            if line.rstrip('\n') == SCHOOLS_HEADER:
+                
+            if str_value == SCHOOLS_HEADER:
                 writing = "schools"
                 with open("escolas.csv",'a') as escolas_csv:
-                    for i in CANDIDATES_COLUMNS:
+                    for i in SCHOOLS_COLUMNS:
                         escolas_csv.writelines(f"{i},")
                     escolas_csv.write("\n")
                 continue
-            if line.rstrip('\n') == MATRICE_HEADER: writing = "nothing"
+                
+            if str_value == MATRICE_HEADER: 
+                writing = "matrice"
+                with open("matrice.csv",'a') as matrice_csv:
+                    for i in range(NS):
+                        matrice_csv.writelines(f"E{i+1},")
+                    matrice_csv.write("\n")
+                continue
+                
 
             match(writing):
                 case "candidates":
@@ -44,19 +46,109 @@ def txt_to_df(File):
                 case "schools":
                     with open("escolas.csv", 'a') as escolas_csv:
                         escolas_csv.write(line)
+                case "matrice":
+                    with open("matrice.csv", 'a') as matrice_csv:
+                        matrice_csv.write(line)
 
     cand_df = pd.read_csv("candidatos.csv")
     esc_df = pd.read_csv("escolas.csv")
+    mat_df = pd.read_csv("matrice.csv")
+    
     cand_df = cand_df.drop(cand_df.columns[-1], axis=1)
     esc_df = esc_df.drop(esc_df.columns[-1],axis=1)
+    mat_df = mat_df.drop(mat_df.columns[-1],axis=1)
+    return cand_df, esc_df, mat_df, NS, NC
 
-    return cand_df, esc_df
+def calculate_capacity(esc_df):
+    cap_school = 0
+    capacities = []
+    for i, row in esc_df.iterrows():
+        caps_rooms = [int(i) for i in row["capacidades_salas"].split(";")]
+        cap_school = sum(caps_rooms)
+        capacities.append(cap_school)
+
+    esc_df["capacidade_total"] = capacities
+    return cap_school
+
+
+def remove_0lefts(esc_ids):
+    return [s[0]+ str(int(s[1:])) for s in esc_ids]
+    
 
 def construtivo(File):
-    cand_df, esc_df = txt_to_df(File)
-    print(cand_df.columns, cand_df.shape)
-    print(cand_df.head())
+    cand_df, esc_df, mat_df, NS,NC = txt_to_df(File)
+    
+    esc_df["id"] = remove_0lefts(esc_df["id"])
+    cand_df["id"]= remove_0lefts(cand_df["id"])
+    
+    calculate_capacity(esc_df)
 
-    print(esc_df.columns, esc_df.shape)
-    print(esc_df.head())
+    # soma das distâncias entre os alunos alocados na escola e a escola
+    sum_of_dists = {f"{k}":0 for k in esc_df["id"]}
+    esc_df = esc_df.sort_values(by=["capacidade_total"], ascending=False)
+
+    Exams = cand_df["tipo_prova"].unique()
+    total_exams_types={f"{k}":0 for k in cand_df["tipo_prova"]}
+    for exam in cand_df["tipo_prova"] : total_exams_types[exam] +=1
+
+    def step(esc_cp,cand_cp, mat_cp, nc,ns):
+        if(nc == 0):
+            pass
+        
+        K = nc//ns
+        K_dists = []
+        M_props = []
+        
+        for i in esc_cp['id']:
+            sum_of_types = {f"{k}":0 for k in Exams}
+            
+            ordered_dists = pd.DataFrame(mat_cp[i]).sort_values(by=[i])
+            K_dist = ordered_dists[0:K]
+            dist_sum = sum(K_dist[i])
+            sum_of_dists[i] = dist_sum
+
+            K_dists.append(dist_sum)            
+            for i in K_dist.index:
+                candidate = cand_cp.iloc[i]
+                sum_of_types[candidate["tipo_prova"]] += 1
+
+            proportions = {key: (value/total_exams_types[key]) for key, value in sum_of_types.items()}
+            majority_prop = max(proportions, key=lambda k: proportions[k])
+
+            M_props.append(majority_prop)
+            
+        esc_cp["dist_sum"] = K_dists
+        esc_cp["tipo_prova"] = M_props
+        ordered_dists = esc_cp.sort_values(by=['dist_sum'])
+        
+        #Pegar a escola no topo da lista
+        best = ordered_dists.iloc[0]
+        ordered = pd.DataFrame(mat_cp[best["id"]]).sort_values(by=[best["id"]])[0:K]
+        
+        allocated_cand = pd.DataFrame([cand_cp.iloc[i] for i in ordered.index])
+        
+        # Alocar os alunos da respectiva prova nela
+        allocated_cand = allocated_cand[allocated_cand["tipo_prova"]==best["tipo_prova"]]
+        allocated_cand["escola"] = best["id"]
+        num_allocated = allocated_cand.shape[0]
+
+
+        # A escola é removida da lista de escolas disponíveis
+        ordered_dists.drop(best.name, axis=0, inplace=True)
+        ns-=1
+        
+        # Os alunos são removidos da lista de alunos desalocados
+        # remover a linha i do mat_cp[i] -> candidato já alocado
+        
+        for al in allocated_cand.iterrows():
+            iloc_idx = al[0]
+            cand_cp.drop(iloc_idx, axis=0, inplace=True)
+            mat_cp.drop(iloc_idx, axis=0, inplace=True)
+
+        nc -= num_allocated
+        
+        # decrementar o valor de NC por K -> K dinâmico : escolhido
+            # Manter o valor de K e controlar por num de alocados -> K Fixo
+
+    step(esc_df.copy(), cand_df.copy(), mat_df.copy(), NC, NS)
 construtivo(PATH_BASE);
