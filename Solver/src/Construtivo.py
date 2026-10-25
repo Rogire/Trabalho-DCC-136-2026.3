@@ -90,10 +90,12 @@ def construtivo(File):
     Exams = cand_df["tipo_prova"].unique()
     total_exams_types={f"{k}":0 for k in cand_df["tipo_prova"]}
     for exam in cand_df["tipo_prova"] : total_exams_types[exam] +=1
-
-    def step(esc_cp,cand_cp, mat_cp, nc,ns):
-        if(nc == 0):
-            pass
+    
+    def step(esc_cp,cand_cp, mat_cp, nc,ns, sol):
+        if(nc <= 0 or ns <= 0):
+            print("Solução encontrada!")
+            print(f"{nc}, {ns}")
+            return sol
         
         K = nc//ns
         K_dists = []
@@ -106,10 +108,10 @@ def construtivo(File):
             K_dist = ordered_dists[0:K]
             dist_sum = sum(K_dist[i])
             sum_of_dists[i] = dist_sum
-
+            
             K_dists.append(dist_sum)            
             for i in K_dist.index:
-                candidate = cand_cp.iloc[i]
+                candidate = cand_cp.loc[i]
                 sum_of_types[candidate["tipo_prova"]] += 1
 
             proportions = {key: (value/total_exams_types[key]) for key, value in sum_of_types.items()}
@@ -120,35 +122,32 @@ def construtivo(File):
         esc_cp["dist_sum"] = K_dists
         esc_cp["tipo_prova"] = M_props
         ordered_dists = esc_cp.sort_values(by=['dist_sum'])
-        
-        #Pegar a escola no topo da lista
+
         best = ordered_dists.iloc[0]
         ordered = pd.DataFrame(mat_cp[best["id"]]).sort_values(by=[best["id"]])[0:K]
         
-        allocated_cand = pd.DataFrame([cand_cp.iloc[i] for i in ordered.index])
+        allocated_cand = cand_cp.loc[ordered.index].copy()
         
-        # Alocar os alunos da respectiva prova nela
         allocated_cand = allocated_cand[allocated_cand["tipo_prova"]==best["tipo_prova"]]
         allocated_cand["escola"] = best["id"]
         num_allocated = allocated_cand.shape[0]
 
 
-        # A escola é removida da lista de escolas disponíveis
+        sol[best["id"]] = {"dist":best["dist_sum"], "exam":best["tipo_prova"], "cap":best["capacidade_total"], "alctd": num_allocated}
+
         ordered_dists.drop(best.name, axis=0, inplace=True)
         ns-=1
-        
-        # Os alunos são removidos da lista de alunos desalocados
-        # remover a linha i do mat_cp[i] -> candidato já alocado
-        
-        for al in allocated_cand.iterrows():
-            iloc_idx = al[0]
-            cand_cp.drop(iloc_idx, axis=0, inplace=True)
-            mat_cp.drop(iloc_idx, axis=0, inplace=True)
 
+        cand_cp.drop(index=allocated_cand.index, inplace=True)
+        mat_cp.drop(index=allocated_cand.index, inplace=True)
+        
         nc -= num_allocated
-        
-        # decrementar o valor de NC por K -> K dinâmico : escolhido
-            # Manter o valor de K e controlar por num de alocados -> K Fixo
 
-    step(esc_df.copy(), cand_df.copy(), mat_df.copy(), NC, NS)
-construtivo(PATH_BASE);
+        return step(ordered_dists, cand_cp, mat_cp, nc, ns, sol)
+
+    solution = step(esc_df.copy(), cand_df.copy(), mat_df.copy(), NC, NS, {})
+    return solution
+    
+res = construtivo(PATH_BASE);
+
+print(res)
