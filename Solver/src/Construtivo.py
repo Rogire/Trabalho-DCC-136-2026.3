@@ -1,147 +1,165 @@
 import pandas as pd
+import heapq
+import pprint as pp
 from Variables import *
+from Aux import *
 
-def txt_to_df(File):
-    NS,NC = 0,0
-    writing = "nothing"
-    with open("candidatos.csv", 'w') as candidatos_csv: pass
-    with open("escolas.csv", 'w') as escolas_csv: pass
-    with open("matrice.csv", 'w') as matrice_csv: pass
-
-    with open(File, "r") as f:
-        for line in f:
-            str_value = line.rstrip("\n")
-            if str_value.find("NUM_CANDIDATOS:") != -1: NC = int(str_value[str_value.find(":")+1:])
-            if str_value.find("NUM_ESCOLAS:") != -1:    NS = int(str_value[str_value.find(":")+1:])
-                
-            if line.rstrip('\n') == CANDIDATES_HEADER:
-                writing = "candidates"
-                with open("candidatos.csv",'a') as candidatos_csv:
-                    for i in CANDIDATES_COLUMNS:
-                        candidatos_csv.writelines(f"{i},")
-                    candidatos_csv.write("\n")
-                continue
-                
-            if str_value == SCHOOLS_HEADER:
-                writing = "schools"
-                with open("escolas.csv",'a') as escolas_csv:
-                    for i in SCHOOLS_COLUMNS:
-                        escolas_csv.writelines(f"{i},")
-                    escolas_csv.write("\n")
-                continue
-                
-            if str_value == MATRICE_HEADER: 
-                writing = "matrice"
-                with open("matrice.csv",'a') as matrice_csv:
-                    for i in range(NS):
-                        matrice_csv.writelines(f"E{i+1},")
-                    matrice_csv.write("\n")
-                continue
-                
-
-            match(writing):
-                case "candidates":
-                    with open("candidatos.csv", 'a') as candidatos_csv:
-                        candidatos_csv.write(line)
-                case "schools":
-                    with open("escolas.csv", 'a') as escolas_csv:
-                        escolas_csv.write(line)
-                case "matrice":
-                    with open("matrice.csv", 'a') as matrice_csv:
-                        matrice_csv.write(line)
-
-    cand_df = pd.read_csv("candidatos.csv")
-    esc_df = pd.read_csv("escolas.csv")
-    mat_df = pd.read_csv("matrice.csv")
-    
-    cand_df = cand_df.drop(cand_df.columns[-1], axis=1)
-    esc_df = esc_df.drop(esc_df.columns[-1],axis=1)
-    mat_df = mat_df.drop(mat_df.columns[-1],axis=1)
-    return cand_df, esc_df, mat_df, NS, NC
-
-def calculate_capacity(esc_df):
-    cap_school = 0
-    capacities = []
-    for i, row in esc_df.iterrows():
-        caps_rooms = [int(i) for i in row["capacidades_salas"].split(";")]
-        cap_school = sum(caps_rooms)
-        capacities.append(cap_school)
-
-    esc_df["capacidade_total"] = capacities
-    return cap_school
-
-
-def remove_0lefts(esc_ids):
-    return [s[0]+ str(int(s[1:])) for s in esc_ids]
-
+def split_rooms_by_demand(rooms, dem1, dem2):
+    total_cap = sum(rooms)
+    total_dem = dem1 + dem2
+    if total_dem == 0 or total_cap == 0:
+        return rooms, []
+    target1 = total_cap * dem1 / total_dem
+    rooms_sorted = sorted(rooms, reverse=True)
+    t1, t2 = [], []
+    c1 = 0
+    for r in rooms_sorted:
+        if c1 < target1:
+            t1.append(r); c1 += r
+        else:
+            t2.append(r)
+    return t1, t2
 
 def construtivo(File):
+    #Preparação
     cand_df, esc_df, mat_df, NS, NC = txt_to_df(File)
     esc_df["id"] = remove_0lefts(esc_df["id"])
     cand_df["id"] = remove_0lefts(cand_df["id"])
     calculate_capacity(esc_df)
-    
+
+    cap_salas = {
+        sid:[int(x) for x in raw.split(";")] for sid, raw in zip(esc_df["id"], esc_df["capacidades_salas"])
+    }
+
     esc_df = esc_df.sort_values("capacidade_total", ascending=False)
 
     exams = cand_df["tipo_prova"].unique()
     remaining_cands_per_type = cand_df["tipo_prova"].value_counts().to_dict()
-    
+
     sol = {}; alocacao = {}
     esc_cp  = esc_df.copy(); cand_cp = cand_df.copy(); mat_cp  = mat_df.copy()
+    school_params = {}
 
     nc, ns = NC, NS
+
     while nc > 0 and ns > 0:
-        K = nc // ns
-        if K <= 0:
-            break
+        dist_sums, types_per_school, K_cache = {}, {}, {}
+        cap1_map, cap2_map = {}, {}
 
-        dist_sums = {}; types_per_school = {}; K_cache = {}
-
+        #Soma das K menores distâncias e definição dos dois tipos de prova dominantes entre elas
         for sid in esc_cp["id"]:
-            K_dists = mat_cp.nsmallest(K,sid).index
-            K_cache[sid] = K_dists
-            dist_sums[sid] = float(mat_cp.loc[K_dists, sid].sum())
+            if sid not in school_params:
+                cap_tot = esc_cp.loc[esc_df["id"]==sid, "capacidade_total"].iloc[0]
+                K = cap_tot
+    
+                K_dists = mat_cp.nsmallest(K, sid)
+                K_dists = K_dists[K_dists.idxmin(axis=1)==sid].index
+                K_cache[sid] = K_dists
+    
+                counts = cand_cp.loc[K_dists, "tipo_prova"].value_counts()
+                avail = [t for t in exams if remaining_cands_per_type.get(t, 0) > 0]
+                if not avail:
+                    raise RuntimeError("Sem tipos disponíveis — instância inviável")
 
-            counts = cand_cp.loc[K_dists, "tipo_prova"].value_counts()
-            avail = [t for t in exams if remaining_cands_per_type.get(t, 0) > 0]
-            if not avail:
-                raise RuntimeError("Sem tipos disponíveis — instância inviável")
+                # Só executa na primeira vez que passar pela escola
+                if (types_per_school.get(sid) == None):
+                    props = {t: counts.get(t, 0) / remaining_cands_per_type[t] for t in avail}
+                    top2 = heapq.nlargest(2, props, key=lambda t: (props[t], remaining_cands_per_type[t]))
+                    t1 = top2[0]
+                    t2 = top2[1] if len(top2) > 1 else None
+                    types_per_school[sid] = (t1, t2)
+    
+                    #preenchimento das salas
+                    rooms = cap_salas[sid]
+                    dem1 = remaining_cands_per_type.get(t1, 0)
+                    dem2 = remaining_cands_per_type.get(t2, 0) if t2 else 0
+                    rt1, rt2 = split_rooms_by_demand(rooms, dem1, dem2)
+                    cap1_map[sid], cap2_map[sid] = sum(rt1), sum(rt2)
+            else:
+                t1 = esc_cp.loc[esc_df["id"]==sid,"tipo_prova_1"].iloc[0]
+                t2 = esc_cp.loc[esc_df["id"]==sid,"tipo_prova_2"].iloc[0] 
                 
-            props = {t: counts.get(t, 0) / remaining_cands_per_type[t] for t in avail}
-            types_per_school[sid] = max(props,  key=lambda k: props[k])
+            allowed = {t1} | ({t2} if t2 else set())
+            mask = cand_cp["tipo_prova"].isin(allowed)
+            K_typed = mat_cp.loc[mask, sid].nsmallest(K).index
+            dist_sums[sid] = float(mat_cp.loc[K_typed, sid].sum()) if len(K_typed) else float("inf")
+                
+        # alocação no dataframe
+        if (    
+            (not "cap_total_t1" in esc_cp.columns) 
+            and not "cap_total_t2" in esc_cp.columns
+            and not "tipo_prova_1" in esc_cp.columns
+            and not "tipo_prova_2" in esc_cp.columns
+        ):
+            esc_cp["tipo_prova_1"] = esc_cp["id"].map(lambda s: types_per_school[s][0])
+            esc_cp["tipo_prova_2"] = esc_cp["id"].map(lambda s: types_per_school[s][1])
+            esc_cp["cap_total_t1"] = esc_cp["id"].map(cap1_map)
+            esc_cp["cap_total_t2"] = esc_cp["id"].map(cap2_map)
+            
+        esc_cp["dist_sum"]     = esc_cp["id"].map(dist_sums)
 
-        esc_cp["dist_sum"]   = esc_cp["id"].map(dist_sums)
-        esc_cp["tipo_prova"] = esc_cp["id"].map(types_per_school)
         best = esc_cp.loc[esc_cp["dist_sum"].idxmin()]
 
-        cap = int(best["capacidade_total"])
-        idx_k = K_cache[best["id"]]
-        cands = cand_cp.loc[idx_k]
-        cands = cands[cands["tipo_prova"] == best["tipo_prova"]].head(cap)
+        t1, t2 = best["tipo_prova_1"], best["tipo_prova_2"]
+        cap1 = int(best["cap_total_t1"])
+        cap2 = int(best["cap_total_t2"]) if t2 else 0
 
-        if cands.empty:
-            esc_cp = esc_cp.drop(best.name)
-            ns -= 1
+        cands = cand_cp.loc[K_cache[best["id"]]]
+        allocated_t1 = len(cands[cands["tipo_prova"] == t1])
+        allocated_t2 = len(cands[cands["tipo_prova"] == t2])
+
+        best["cap_total_t1"] = best["cap_total_t1"]-allocated_t1
+        best["cap_total_t2"] = best["cap_total_t2"]-allocated_t2
+        
+        allocated = pd.concat([
+            cands[cands["tipo_prova"] == t1].head(cap1),
+            cands[cands["tipo_prova"] == t2].head(cap2) if t2 else cands.iloc[0:0],
+        ])
+
+        if allocated.empty:
+            esc_cp = esc_cp.drop(best.name); ns -= 1
             continue
 
-        for cid in cands.index:
-            alocacao[cid] = best["id"]
-            remaining_cands_per_type[best["tipo_prova"]] -= 1
+        for tipo, qtd in allocated["tipo_prova"].value_counts().items():
+            remaining_cands_per_type[tipo] -= qtd
 
+        for cid_real in cand_cp.loc[allocated.index, "id"]:
+            alocacao[cid_real] = best["id"]
+        
         sol[best["id"]] = {
-            "dist": float(best["dist_sum"]),
-            "exam": best["tipo_prova"],
-            "cap":  cap,
-            "alctd": len(cands),
+            "dist":  float(best["dist_sum"]),
+            "exam":  (t1, t2),
+            "cap1":  cap1,
+            "cap2":  cap2,
+            "total_cap":(cap1+cap2),
+            "sobra":(cap1+cap2)-len(allocated),
+            "alctd": len(allocated),
         }
 
-        esc_cp = esc_cp.drop(best.name); cand_cp = cand_cp.drop(cands.index); mat_cp  = mat_cp.drop(cands.index)
-        ns -= 1; nc -= len(cands)
+        best["capacidade_total"] = best["capacidade_total"]-len(allocated)
+        
+        if best["capacidade_total"]<=0:
+            esc_cp  = esc_cp.drop(best.name)
+            ns -= 1
+            
+        cand_cp = cand_cp.drop(allocated.index)
+        mat_cp  = mat_cp.drop(allocated.index)
+        nc -= len(allocated)
 
     if nc > 0:
         print(f"[AVISO] {nc} candidatos não alocados — solução inviável")
 
     return sol, alocacao
 
-sol, al = construtivo(PATH_BASE)
-#print(sol)
+sol, al = construtivo(PATH_DIF)
+tot, sob, alc = 0,0,0
+for i in sol:
+    tot+=sol[i]["total_cap"]
+    sob+=sol[i]["sobra"]
+    alc+=sol[i]["alctd"]
+
+# print(tot)
+# print(sob)
+# print(alc)
+
+# pp.pprint(sol)
