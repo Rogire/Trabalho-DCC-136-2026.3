@@ -2,6 +2,9 @@ TIPOS = {"M1", "M2", "M3e", "M3s", "M3h", "M3d"}
 PATH_BASE = "../../Instancias_criadas/Instancia1_G7.txt"
 PATH_DIF = "../../Instancias_criadas/Instancia2_G7.txt"
 
+DRIVE_BASE="../../Instancias_Grupos/Instancia1_G9.txt"
+
+
 CANDIDATES_HEADER = "# CANDIDATOS (id, CEP, tipo_prova, latitude, longitude)"
 CANDIDATES_COLUMNS  = ["id", "CEP", "tipo_prova", "latitude", "longitude"]
 
