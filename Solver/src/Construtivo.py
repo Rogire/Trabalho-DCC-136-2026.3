@@ -4,7 +4,7 @@ import numpy as np
 
 import pprint as pp
 from Variables import *
-from Aux import *
+from Auxiliar import *
 
 class Constructive:
     def __init__(self, File):
