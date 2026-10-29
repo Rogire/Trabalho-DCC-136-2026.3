@@ -7,6 +7,10 @@ PATH_CAND = "CSV/candidatos.csv"
 PATH_SCH = "CSV/escolas.csv"
 PATH_MAT = "CSV/matrice.csv"
 
+SCHOOLS_HEADER = "# ESCOLAS (id, CEP, latitude, longitude, num_salas, capacidades_salas)"
+CANDIDATES_HEADER = "# CANDIDATOS (id, CEP, tipo_prova, latitude, longitude)"
+MATRICE_HEADER = "# MATRIZ_DISTANCIAS (linhas=candidatos, colunas=escolas, em km)"
+
 def txt_to_df(File):
     NS,NC = 0,0
     writing = "nothing"
@@ -16,11 +20,11 @@ def txt_to_df(File):
 
     with open(File, "r") as f:
         for line in f:
-            str_value = line.rstrip("\n")
+            str_value = line.rstrip("\r\n")
             if str_value.find("NUM_CANDIDATOS:") != -1: NC = int(str_value[str_value.find(":")+1:])
             if str_value.find("NUM_ESCOLAS:") != -1:    NS = int(str_value[str_value.find(":")+1:])
                 
-            if line.rstrip('\n') == CANDIDATES_HEADER:
+            if line.startswith("# CANDIDATOS"):
                 writing = "candidates"
                 with open(PATH_CAND,'a') as candidatos_csv:
                     for i in CANDIDATES_COLUMNS:
@@ -28,7 +32,7 @@ def txt_to_df(File):
                     candidatos_csv.write("\n")
                 continue
                 
-            if str_value == SCHOOLS_HEADER:
+            if line.startswith("# ESCOLAS"):
                 writing = "schools"
                 with open(PATH_SCH,'a') as escolas_csv:
                     for i in SCHOOLS_COLUMNS:
@@ -36,7 +40,7 @@ def txt_to_df(File):
                     escolas_csv.write("\n")
                 continue
                 
-            if str_value == MATRICE_HEADER: 
+            if line.startswith("# MATRIZ"): 
                 writing = "matrice"
                 with open(PATH_MAT,'a') as matrice_csv:
                     for i in range(NS):

@@ -33,14 +33,14 @@ class Constructive:
         self.sol, self.alocacao = {}, {}
 
     #Passos do algoritmo
-    
-    # Divisao das salas 
+
+    # Divisao das salas
     def split_rooms(self, rooms, dem1, dem2):
         total_cap = sum(rooms)
         total_dem = dem1 + dem2
         if total_dem == 0 or total_cap == 0:
             return rooms, []
-            
+
         target1 = total_cap * dem1 / total_dem
         rooms_sorted = sorted(rooms, reverse=True)
         t1, t2 = [], []
@@ -60,20 +60,20 @@ class Constructive:
         return cap_rem
 
     def get_ordered(self, sid):
-        school_names = self.mat_cp.columns.values         
+        school_names = self.mat_cp.columns.values
         school_to_j  = {s: j for j, s in enumerate(school_names)}
-    
-        values       = self.mat_cp.values            
-        pos_to_label = self.mat_cp.index.values  
-    
+
+        values       = self.mat_cp.values
+        pos_to_label = self.mat_cp.index.values
+
         cand_codes = self.cand_cp["tipo_prova"]
         cand_codes = cand_codes.loc[self.mat_cp.index].values
         j      = school_to_j[sid]
-        col    = values[:, j]                     
+        col    = values[:, j]
         order  = np.argsort(col)
         return order, pos_to_label, cand_codes, j
-    
-    # Define a prioridade de alocação entre 
+
+    # Define a prioridade de alocação entre
     def compute_cap_aware_claims(self, allowed_by_school, min_quota=1):
         budget = {}
         for sid in self.esc_cp.index:
@@ -81,17 +81,17 @@ class Constructive:
             budget[sid] = cap
 
         school_names = self.mat_cp.columns.values
-        
+
         #{nome escola: capacidade(budget)}
         school_to_j = {s:j for j, s in enumerate(school_names)}
-        
+
         dist_values = self.mat_cp.values
         pos_to_label = self.mat_cp.index.values
         n_alive      = len(pos_to_label)
 
         cands_exams = self.cand_cp["tipo_prova"]
         cands_exams = cands_exams.loc[self.mat_cp.index].values
-        
+
         claims = pd.Series(index=self.mat_cp.index, dtype=object)
         reserved = np.zeros(n_alive, dtype=bool)
         budget   = {sid: self.calc_capacity(self.esc_cp, sid) for sid in self.esc_cp.index}
@@ -101,30 +101,30 @@ class Constructive:
             quota = min(min_quota, budget[sid])
             if quota <= 0:  continue
             j = school_to_j[sid]
-                
+
             #ordena pela menor distância e pega os filtra os alunos com provas permitidas
             order   = np.argsort(dist_values[:, j])
             allowed = allowed_by_school[sid]; allowed_arr   = np.array(list(allowed))
             type_ok = np.isin(cands_exams[order], allowed_arr)
             free    = ~reserved[order]
-            
+
             ok_pos  = order[type_ok & free]
             to_claim = ok_pos[:quota]
-            
+
             for pos in to_claim:
                 claims.at[pos_to_label[pos]] = sid
                 reserved[pos] = True
                 budget[sid]  -= 1
 
-        
+
         school_pos = np.argsort(self.mat_cp.values, axis=1)
         names      = self.mat_cp.columns.values
         self.cand_types = self.cand_cp["tipo_prova"]
-        
+
         for c in self.mat_cp.min(axis=1).sort_values().index:
             if c in reserved:   continue
             c_pos = self.mat_cp.index.get_loc(c)
-            ctype = self.cand_types[c] 
+            ctype = self.cand_types[c]
             for s_pos in school_pos[c_pos]:
                 sid = names[s_pos]
                 if budget.get(sid, 0) > 0 and ctype in allowed_by_school[sid]:
@@ -137,52 +137,52 @@ class Constructive:
         ranked_labels = pos_to_label[order]
         allowed = allowed_by_school[sid]
         is_claimed    = (claims.loc[ranked_labels] == sid).values
-        allowed_arr   = np.array(list(allowed))    
+        allowed_arr   = np.array(list(allowed))
         type_ok       = np.isin(cand_codes[order], allowed_arr)
 
         claimed_pos = order[ is_claimed &  type_ok]
         others_pos  = order[~is_claimed &  type_ok]
 
         return type_ok, claimed_pos, others_pos
-        
+
     def Distributed_Rank(self, allowed_by_school):
         claims = self.compute_cap_aware_claims(allowed_by_school, min_quota=1)
         dist_sums, K_cache = {}, {}
         values             = self.mat_cp.values
-        
+
         for sid in self.esc_cp.index:
             allowed = allowed_by_school[sid]
             if not allowed:
                 dist_sums[sid] = float("inf")
                 continue
-                
+
             cap_rem = self.calc_capacity(self.esc_cp, sid)
             if cap_rem <= 0:
                 dist_sums[sid] = float("inf")
                 continue
-                
+
             order, pos_to_label, cand_codes, j = self.get_ordered(sid)
             ranked_labels = pos_to_label[order]
             is_claimed    = (claims.loc[ranked_labels] == sid).values
-    
-            allowed_arr   = np.array(list(allowed))    
+
+            allowed_arr   = np.array(list(allowed))
             type_ok       = np.isin(cand_codes[order], allowed_arr)
-    
+
             claimed_pos = order[ is_claimed &  type_ok]
             others_pos  = order[~is_claimed &  type_ok]
             pool_pos    = np.concatenate([claimed_pos, others_pos])
-    
+
             K_cache[sid]   = pos_to_label[pool_pos].tolist()
-            head           = pool_pos[:cap_rem]    
+            head           = pool_pos[:cap_rem]
             dist_sums[sid] = float(values[head, j].sum()) if len(head) else float("inf")
-    
+
         return dist_sums, K_cache
 
 
     def Assign_Exams(self, sid):
         if sid in self.ready:
             return
-            
+
         cap_tot = int(self.esc_cp.at[sid, "capacidade_total"])
         K = min(cap_tot, len(self.mat_cp))
         near = self.mat_cp.nsmallest(K, sid).index
@@ -197,7 +197,7 @@ class Constructive:
         rt1, rt2 = self.split_rooms(self.cap_salas[sid],
                                     self.remaining.get(t1, 0),
                                     self.remaining.get(t2, 0) if t2 else 0)
-        
+
         self.esc_cp.at[sid, "tipo_prova_1"] = t1
         self.esc_cp.at[sid, "tipo_prova_2"] = t2
         self.esc_cp.at[sid, "cap_total_t1"] = sum(rt1)
@@ -220,7 +220,7 @@ class Constructive:
     # Solucao
     def Generate_Solution(self, best_sid, allocated_idx, t_idxs, t1, t2):
         n1 = len(t_idxs[0])
-        n2 = len(t_idxs[1]) if t2 else 0                   
+        n2 = len(t_idxs[1]) if t2 else 0
         allocated = self.cand_cp.loc[allocated_idx]
 
         self.esc_cp.at[best_sid, "cap_total_t1"] -= n1
@@ -240,6 +240,7 @@ class Constructive:
                 "alctd": 0,
                 "sobra": None,
             }
+
         self.sol[best_sid]["alctd"] += len(allocated_idx)
         self.sol[best_sid]["sobra"]  = remaining_cap
         return remaining_cap
@@ -300,6 +301,9 @@ class Constructive:
                 stagnation = 0
 
         return self.sol, self.alocacao
+
+
+
 
 ctv = Constructive(DRIVE_BASE)
 sol, al = ctv.run()
