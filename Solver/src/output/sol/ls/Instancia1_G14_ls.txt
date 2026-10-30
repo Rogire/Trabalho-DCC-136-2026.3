@@ -1,0 +1,12 @@
+E1 : {'dist_sum': 4.0238172413793105, 'exam': (' M3s', ' M2'), 'cap1': 29, 'cap2': 0, 'alctd': 29, 'sobra': 0}
+E2 : {'dist_sum': 5.083736363636363, 'exam': (' M2', ' M3e'), 'cap1': 25, 'cap2': 10, 'alctd': 33, 'sobra': 2}
+E3 : {'dist_sum': 2.8579, 'exam': (' M3e', ' M3d'), 'cap1': 29, 'cap2': 10, 'alctd': 39, 'sobra': 0}
+E4 : {'dist_sum': 6.496307142857144, 'exam': (' M3h', ' M3e'), 'cap1': 29, 'cap2': 12, 'alctd': 14, 'sobra': 27}
+E5 : {'dist_sum': 2.4104684210526313, 'exam': (' M1', ' M2'), 'cap1': 26, 'cap2': 14, 'alctd': 38, 'sobra': 2}
+E6 : {'dist_sum': 2.5970955555555553, 'exam': (' M3d', ' M1'), 'cap1': 27, 'cap2': 18, 'alctd': 45, 'sobra': 0}
+E7 : {'dist_sum': 2.9583400000000006, 'exam': (' M2', ' M3s'), 'cap1': 27, 'cap2': 0, 'alctd': 25, 'sobra': 2}
+E8 : {'dist_sum': 2.8375909090909093, 'exam': (' M3s', ' M1'), 'cap1': 28, 'cap2': 11, 'alctd': 22, 'sobra': 17}
+E9 : {'dist_sum': 3.031771428571428, 'exam': (' M3h', ' M3e'), 'cap1': 42, 'cap2': 9, 'alctd': 42, 'sobra': 9}
+E10 : {'dist_sum': 2.17870625, 'exam': (' M3h', ' M3s'), 'cap1': 16, 'cap2': 0, 'alctd': 16, 'sobra': 0}
+E11 : {'dist_sum': 3.794477777777778, 'exam': (' M3e', ' M2'), 'cap1': 24, 'cap2': 4, 'alctd': 27, 'sobra': 1}
+E12 : {'dist_sum': 3.9572650000000005, 'exam': (' M3d', ' M3s'), 'cap1': 27, 'cap2': 15, 'alctd': 40, 'sobra': 2}

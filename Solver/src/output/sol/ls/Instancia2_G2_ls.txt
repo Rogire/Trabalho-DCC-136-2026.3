@@ -1,0 +1,5 @@
+E1 : {'dist_sum': 12.997475, 'exam': (' M2', ' M1'), 'cap1': 8, 'cap2': 8, 'alctd': 16, 'sobra': 0}
+E2 : {'dist_sum': 11.875746153846153, 'exam': (' M3h', ' M3e'), 'cap1': 15, 'cap2': 12, 'alctd': 26, 'sobra': 1}
+E3 : {'dist_sum': 5.600800000000001, 'exam': (' M3d', ' M3e'), 'cap1': 15, 'cap2': 7, 'alctd': 15, 'sobra': 7}
+E4 : {'dist_sum': 5.5790999999999995, 'exam': (' M1', ' M2'), 'cap1': 21, 'cap2': 5, 'alctd': 25, 'sobra': 1}
+E5 : {'dist_sum': 7.670825925925926, 'exam': (' M3s', ' M2'), 'cap1': 16, 'cap2': 14, 'alctd': 27, 'sobra': 3}

@@ -1,0 +1,16 @@
+E1 : {'dist_sum': 2.183375, 'exam': (' M3d', ' M1'), 'cap1': 4, 'cap2': 4, 'alctd': 8, 'sobra': 0}
+E2 : {'dist_sum': 3.6123773584905656, 'exam': (' M3e', ' M1'), 'cap1': 30, 'cap2': 23, 'alctd': 53, 'sobra': 0}
+E3 : {'dist_sum': 2.45335, 'exam': (' M1', ' M2'), 'cap1': 12, 'cap2': 0, 'alctd': 12, 'sobra': 0}
+E4 : {'dist_sum': 1.3941375, 'exam': (' M3s', ' M2'), 'cap1': 4, 'cap2': 4, 'alctd': 8, 'sobra': 0}
+E5 : {'dist_sum': 1.9875333333333332, 'exam': (' M3e', ' M3h'), 'cap1': 4, 'cap2': 5, 'alctd': 9, 'sobra': 0}
+E6 : {'dist_sum': 2.5247183673469387, 'exam': (' M1', ' M3e'), 'cap1': 39, 'cap2': 10, 'alctd': 49, 'sobra': 0}
+E7 : {'dist_sum': 4.7047625, 'exam': (' M3d', ' M2'), 'cap1': 5, 'cap2': 4, 'alctd': 8, 'sobra': 1}
+E8 : {'dist_sum': 2.188872727272727, 'exam': (' M2', ' M1'), 'cap1': 7, 'cap2': 4, 'alctd': 11, 'sobra': 0}
+E9 : {'dist_sum': 1.822088888888889, 'exam': (' M1', ' M3e'), 'cap1': 9, 'cap2': 0, 'alctd': 9, 'sobra': 0}
+E10 : {'dist_sum': 2.464630769230769, 'exam': (' M3h', ' M1'), 'cap1': 8, 'cap2': 6, 'alctd': 13, 'sobra': 1}
+E11 : {'dist_sum': 3.517059615384615, 'exam': (' M1', ' M3d'), 'cap1': 43, 'cap2': 32, 'alctd': 52, 'sobra': 23}
+E12 : {'dist_sum': 2.04119, 'exam': (' M3e', ' M1'), 'cap1': 30, 'cap2': 31, 'alctd': 60, 'sobra': 1}
+E13 : {'dist_sum': 3.071280701754386, 'exam': (' M2', ' M1'), 'cap1': 16, 'cap2': 42, 'alctd': 57, 'sobra': 1}
+E14 : {'dist_sum': 1.9223999999999999, 'exam': (' M3h', ' M1'), 'cap1': 8, 'cap2': 6, 'alctd': 12, 'sobra': 2}
+E15 : {'dist_sum': 4.60525, 'exam': (' M3e', None), 'cap1': 10, 'cap2': 0, 'alctd': 10, 'sobra': 0}
+E16 : {'dist_sum': 2.613509090909091, 'exam': (' M2', ' M3s'), 'cap1': 7, 'cap2': 4, 'alctd': 11, 'sobra': 0}

@@ -8,3 +8,5 @@ Criacao_das_Instancias/src/Model_Generation_2/Instancias
 
 Solver/src/*.csv
 Solver/src/__pycache__/*
+Solver/src/output/*
+Solver/src/output/*

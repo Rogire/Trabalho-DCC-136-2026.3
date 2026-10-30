@@ -187,10 +187,12 @@ class LocalSearch:
             sid = self.ids_esc[e]
             if usados[sid]:
                 (t1, c1), (t2, c2) = (list(conf.items()) + [(None, 0)])[:2]
-                sol[sid] = {"exam": (t1, t2), "cap1": c1, "cap2": c2,
+                cands = np.flatnonzero(self.aloc == e)
+                dist_sum = float(self.D[cands, e].mean()) if len(cands) else 0.0
+                sol[sid] = {"dist_sum": dist_sum, "exam": (t1, t2),
+                            "cap1": c1, "cap2": c2,
                             "alctd": usados[sid], "sobra": c1 + c2 - usados[sid]}
         return sol, alocacao
-
     #Loop Principal
     def run(self):
         self.Reparar_Tipos()                                  # 1. vagas de cada tipo >= candidatos do tipo
