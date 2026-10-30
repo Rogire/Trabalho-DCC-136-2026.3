@@ -52,4 +52,6 @@ parâmetros definidos nesta atividade.
 Linguagem de implementação do gerador de instâncias: Python
 
 ## Parte 2 - Implementação do algoritmo
+- Algoritmo implementado em Python, as descrições foram feitas no relatório e na apresentação
+- Para executar em ambientes Linux, basta executar o arquivo run.sh (Precisa do Python instalado na máquina)
 # Trabalho-Inteligencia-Computacional-DCC-136-2026.3

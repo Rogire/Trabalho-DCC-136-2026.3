@@ -208,11 +208,12 @@ class Constructive:
         rt1, rt2 = self.split_rooms(self.cap_salas[sid], local1, local2)
     
         self.esc_cp.at[sid, "tipo_prova_1"] = t1
+        self.esc_cp.at[sid, "cap_total_t1"] = sum(rt1)
+        
         if self.dual:
             self.esc_cp.at[sid, "tipo_prova_2"] = t2
+            self.esc_cp.at[sid, "cap_total_t2"] = sum(rt2)
             
-        self.esc_cp.at[sid, "cap_total_t1"] = sum(rt1)
-        self.esc_cp.at[sid, "cap_total_t2"] = sum(rt2)
         self.ready.add(sid)
 
     def Set_And_Allocate(self, K_cache, best_sid, t1, t2, cap1, cap2):
@@ -232,6 +233,7 @@ class Constructive:
         n1 = len(t_idxs[0])
         n2 = len(t_idxs[1]) if t2 else 0
         allocated = self.cand_cp.loc[allocated_idx]
+        dist_batch_sum = float(self.mat_cp.loc[allocated_idx, best_sid].sum())
 
         self.esc_cp.at[best_sid, "cap_total_t1"] -= n1
         if t2:
@@ -245,13 +247,14 @@ class Constructive:
 
         if best_sid not in self.sol:
             self.sol[best_sid] = {
-                "dist_sum":self.esc_cp.at[best_sid, "dist_sum"],
+                "dist_sum":0.0,
                 "exam": (t1, t2),
                 "cap1": int(self.esc_cp.at[best_sid, "cap_total_t1"]) + n1,
                 "cap2": (int(self.esc_cp.at[best_sid, "cap_total_t2"]) + n2) if t2 else 0,
                 "alctd": 0,
                 "sobra": None,
             }
+        self.sol[best_sid]["dist_sum"] += dist_batch_sum 
         self.sol[best_sid]["alctd"] += len(allocated_idx)
         self.sol[best_sid]["sobra"]  = remaining_cap
         return remaining_cap
